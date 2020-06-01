@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateMaintenanceEvents < ActiveRecord::Migration[6.0]
   def change
     create_table :maintenance_events do |t|

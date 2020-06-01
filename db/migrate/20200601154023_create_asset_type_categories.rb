@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAssetTypeCategories < ActiveRecord::Migration[6.0]
   def change
     create_table :asset_type_categories do |t|
