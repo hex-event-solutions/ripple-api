@@ -1,0 +1,38 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: assetmanagement
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432"
+  web:
+    build: .
+    command: sh -c 'rm -f /myapp/tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b "0.0.0.0"'
+    # command: sh -c 'rm -f /myapp/tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b "0.0.0.0"'
+    # volumes:
+    #   - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - RAILS_ENV=development
+      - RAILS_LOG_TO_STDOUT=present
+      - SECRET_KEY_BASE=b367701b74c339b3baa5d48ae00429eb40a9f2715f57971883d234ea3654a1eb71ca5a266017eef00847f56650b3d07bb53a7fd1b2ca79742dd47ceae840711b
+    restart: always
+  minio:
+    image: minio/minio:latest
+    environment:
+      - MINIO_ACCESS_KEY=accesskey
+      - MINIO_SECRET_KEY=secretkey
+    volumes:
+      - ./data/minio:/data
+    ports:
+      - "9000:9000"
+    command: server /data
+volumes:
+  postgres_data:
