@@ -8,7 +8,7 @@ class CreateClients < ActiveRecord::Migration[6.0]
       t.string :city
       t.string :county
       t.string :postcode
-      t.integer :client_type
+      t.references :client_type, null: false, foreign_key: true
       t.integer :discount
 
       t.timestamps

@@ -4,7 +4,7 @@ class CreateMaintenanceEvents < ActiveRecord::Migration[6.0]
       t.references :maintenance_schedule, null: false, foreign_key: true
       t.references :asset, null: false, foreign_key: true
       t.text :details
-      t.integer :state
+      t.references :maintenance_resolution, null: false, foreign_key: true
 
       t.timestamps
     end

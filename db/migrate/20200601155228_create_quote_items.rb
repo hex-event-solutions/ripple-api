@@ -3,7 +3,7 @@ class CreateQuoteItems < ActiveRecord::Migration[6.0]
     create_table :quote_items do |t|
       t.references :quote, null: false, foreign_key: true
       t.references :item, null: false, foreign_key: true
-      t.integer :type
+      t.references :item_type, null: false, foreign_key: true
       t.decimal :quantity
       t.integer :discount
 

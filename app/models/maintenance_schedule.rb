@@ -1,5 +1,5 @@
 class MaintenanceSchedule < ApplicationRecord
   belongs_to :asset_type
+  belongs_to :maintenance_type
 
-  enum maintenance_type: %i[pat repair preventative investigative]
 end

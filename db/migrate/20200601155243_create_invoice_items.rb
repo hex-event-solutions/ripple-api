@@ -3,7 +3,7 @@ class CreateInvoiceItems < ActiveRecord::Migration[6.0]
     create_table :invoice_items do |t|
       t.references :invoice, null: false, foreign_key: true
       t.references :item, null: false, foreign_key: true
-      t.integer :type
+      t.references :item_type, null: false, foreign_key: true
       t.decimal :quantity
       t.integer :discount
 

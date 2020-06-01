@@ -3,7 +3,7 @@ class CreateAssetTypes < ActiveRecord::Migration[6.0]
     create_table :asset_types do |t|
       t.decimal :cost
       t.decimal :rate
-      t.integer :rate_multiplier
+      t.references :multiplier_type, null: false, foreign_key: true
       t.boolean :display_on_website
       t.string :manufacturer
       t.string :model

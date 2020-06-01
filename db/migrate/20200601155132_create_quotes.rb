@@ -5,8 +5,8 @@ class CreateQuotes < ActiveRecord::Migration[6.0]
       t.references :client, null: false, foreign_key: true
       t.datetime :date_sent
       t.datetime :date_expires
-      t.integer :state
-
+      t.references :document_state, null: false, foreign_key: true
+      
       t.timestamps
     end
   end
