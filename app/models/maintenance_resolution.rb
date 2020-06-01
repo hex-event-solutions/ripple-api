@@ -1,0 +1,2 @@
+class MaintenanceResolution < ApplicationRecord
+end
