@@ -12,14 +12,18 @@ FactoryBot.define do
     name { 'Admin' }
   end
 
+  factory :role_privilege do
+    role
+    action { 'create' }
+    resource { 'asset' }
+  end
+
   factory :crew_role do
     crew
     role
   end
 
-  factory :role_privilege do
-    role
-    action { 'create' }
-    resource { 'asset' }
+  factory :client_type do
+    name { 'Individual' }
   end
 end
