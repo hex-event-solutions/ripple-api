@@ -8,4 +8,11 @@ RSpec.describe Role do
       expect(role.name).to eq 'Admin'
     end
   end
+
+  describe 'associations' do
+    let!(:crew_role) { create :crew_role, role: role }
+    it 'has a CrewRole association' do
+      expect(role.crew_roles).to include crew_role
+    end
+  end
 end
