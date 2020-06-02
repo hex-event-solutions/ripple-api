@@ -6,6 +6,7 @@ RUN apk add --update \
   tzdata \
   git \
   postgresql-dev \
+  sqlite-dev \
   && rm -rf /var/cache/apk*
 
 RUN gem update --system
