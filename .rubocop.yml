@@ -3,9 +3,9 @@ Style/Documentation:
 
 Metrics/MethodLength:
   Exclude:
-    - app/controllers/graphql_controller.rb
-
-Metrics/MethodLength:
-  Exclude:
     - db/migrate/*
     - app/controllers/graphql_controller.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - db/schema.rb
