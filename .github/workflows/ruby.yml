@@ -18,6 +18,18 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: postgres
+        env:
+          POSTGRES_USER: assetmanagement
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -45,6 +57,6 @@ jobs:
     - name: Run Reek
       run: bundle exec reek
     - name: Migrate DB
-      run: bundle exec rails db:migrate RAILS_ENV=test
+      run: bundle exec rails db:setup RAILS_ENV=test
     - name: Run rspec
       run: bundle exec rspec
