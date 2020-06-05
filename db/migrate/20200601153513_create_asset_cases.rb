@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateCases < ActiveRecord::Migration[6.0]
+class CreateAssetCases < ActiveRecord::Migration[6.0]
   def change
-    create_table :cases do |t|
+    create_table :asset_cases do |t|
       t.string :barcode
 
       t.timestamps
