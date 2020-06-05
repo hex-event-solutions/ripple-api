@@ -1,0 +1,20 @@
+---
+detectors:
+  IrresponsibleModule:
+    enabled: false
+
+  NilCheck:
+    exclude:
+      - GraphqlController#ensure_hash
+
+  TooManyStatements:
+    exclude:
+      - GraphqlController#execute
+
+  UncommunicativeVariableName:
+    exclude:
+      - GraphqlController#execute
+
+
+exclude_paths:
+- db/migrate
