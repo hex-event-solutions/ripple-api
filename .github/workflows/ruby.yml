@@ -33,6 +33,8 @@ jobs:
       run: bundle install
     - name: Run Rubocop
       run: bundle exec rubocop
+    - name: Run Reek
+      run: bundle exec reek
     - name: Migrate DB
       run: bundle exec rails db:migrate RAILS_ENV=test
     - name: Run rspec
