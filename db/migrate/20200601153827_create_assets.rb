@@ -2,11 +2,11 @@
 
 class CreateAssets < ActiveRecord::Migration[6.0]
   def change
-    create_table :assets do |t|
-      t.references :company, null: false, foreign_key: true
-      t.references :asset_type, null: false, foreign_key: true
+    create_table :assets, id: :uuid, default: 'gen_random_uuid()' do |t|
+      t.references :company, type: :uuid, null: false, foreign_key: true
+      t.references :asset_type, type: :uuid, null: false, foreign_key: true
       t.string :barcode
-      t.references :asset_case, null: false, foreign_key: true
+      t.references :asset_case, type: :uuid, null: false, foreign_key: true
 
       t.timestamps
     end

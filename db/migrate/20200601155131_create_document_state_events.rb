@@ -2,10 +2,10 @@
 
 class CreateDocumentStateEvents < ActiveRecord::Migration[6.0]
   def change
-    create_table :document_state_events do |t|
-      t.references :company, null: false, foreign_key: true
-      t.references :document_state, null: false, foreign_key: true
-      t.references :document, null: false, foreign_key: true
+    create_table :document_state_events, id: :uuid, default: 'gen_random_uuid()' do |t|
+      t.references :company, type: :uuid, null: false, foreign_key: true
+      t.references :document_state, type: :uuid, null: false, foreign_key: true
+      t.references :document, type: :uuid, null: false, foreign_key: true
       t.string :details
 
       t.timestamps

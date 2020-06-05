@@ -2,11 +2,11 @@
 
 class CreateDocuments < ActiveRecord::Migration[6.0]
   def change
-    create_table :documents do |t|
-      t.references :company, null: false, foreign_key: true
+    create_table :documents, id: :uuid, default: 'gen_random_uuid()' do |t|
+      t.references :company, type: :uuid, null: false, foreign_key: true
       t.integer :event_id
-      t.references :client, null: false, foreign_key: true
-      t.references :document_type, null: false, foreign_key: true
+      t.references :client, type: :uuid, null: false, foreign_key: true
+      t.references :document_type, type: :uuid, null: false, foreign_key: true
 
       t.timestamps
     end

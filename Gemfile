@@ -31,9 +31,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'reek', '~> 6.0'
-end
-
-group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails', '~> 5.2'
   gem 'faker'

@@ -2,8 +2,8 @@
 
 class CreateDocumentTypes < ActiveRecord::Migration[6.0]
   def change
-    create_table :document_types do |t|
-      t.references :company, null: false, foreign_key: true
+    create_table :document_types, id: :uuid, default: 'gen_random_uuid()' do |t|
+      t.references :company, type: :uuid, null: false, foreign_key: true
       t.string :name
 
       t.timestamps
