@@ -1,4 +1,8 @@
 # frozen_string_literal: true
 
 class Specification < ApplicationRecord
+  has_many :asset_type_specifications
+  has_many :asset_types, through: :asset_type_specifications
+
+  validates :name, presence: true, length: { maximum: 32 }, uniqueness: true
 end

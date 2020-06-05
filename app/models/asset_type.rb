@@ -5,10 +5,16 @@ class AssetType < ApplicationRecord
   has_many :asset_type_events
   has_many :events, through: :asset_type_events
   has_many :maintenance_schedules
-  has_many :specifications
-  has_many :values, through: :specifications
+  has_many :asset_type_specifications
+  has_many :specifications, through: :asset_type_specifications
   has_many :asset_type_categories
   has_many :categories, through: :asset_type_categories
+  has_many :accessories
 
-  enum rate_multiplier: %i[daily short_week weekly monthly annually]
+  belongs_to :multiplier_type
+
+  validates :cost, :rate, :multiplier_type, :manufacturer, :model, :weight, :description, presence: true
+  validates :cost, :rate, :weight, numericality: true
+  validates :display_on_website, inclusion: { in: [true, false] }
+  validates :manufacturer, :model, length: { maximum: 64 }
 end

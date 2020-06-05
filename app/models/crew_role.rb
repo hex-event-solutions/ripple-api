@@ -3,4 +3,6 @@
 class CrewRole < ApplicationRecord
   belongs_to :crew
   belongs_to :role
+
+  validates :crew, :role, presence: true
 end
