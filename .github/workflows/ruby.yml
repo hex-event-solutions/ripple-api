@@ -29,8 +29,17 @@ jobs:
         ruby-version: 2.7.1
     - name: Install OS dependencies
       run: sudo apt install libsqlite3-dev
+    - name: Restore cache
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
     - name: Run Rubocop
       run: bundle exec rubocop
     - name: Run Reek
