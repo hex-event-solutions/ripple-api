@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['asset_type_id'], name: 'index_accessories_on_asset_type_id'
   end
 
+  create_table 'asset_cases', force: :cascade do |t|
+    t.string 'barcode'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+  end
+
   create_table 'asset_events', force: :cascade do |t|
     t.integer 'asset_id', null: false
     t.integer 'event_id', null: false
@@ -78,24 +84,20 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   create_table 'assets', force: :cascade do |t|
     t.integer 'asset_type_id', null: false
     t.string 'barcode'
-    t.integer 'case_id', null: false
+    t.integer 'asset_case_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.index ['asset_case_id'], name: 'index_assets_on_asset_case_id'
     t.index ['asset_type_id'], name: 'index_assets_on_asset_type_id'
-    t.index ['case_id'], name: 'index_assets_on_case_id'
-  end
-
-  create_table 'cases', force: :cascade do |t|
-    t.string 'barcode'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
   end
 
   create_table 'categories', force: :cascade do |t|
     t.string 'name'
+    t.string 'fullname'
     t.integer 'parent_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.index ['parent_id'], name: 'index_categories_on_parent_id'
   end
 
   create_table 'client_types', force: :cascade do |t|
@@ -149,10 +151,59 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.datetime 'updated_at', precision: 6, null: false
   end
 
+  create_table 'document_items', force: :cascade do |t|
+    t.integer 'document_id', null: false
+    t.integer 'item_id', null: false
+    t.integer 'item_type_id', null: false
+    t.decimal 'quantity'
+    t.integer 'discount'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['document_id'], name: 'index_document_items_on_document_id'
+    t.index ['item_id'], name: 'index_document_items_on_item_id'
+    t.index ['item_type_id'], name: 'index_document_items_on_item_type_id'
+  end
+
+  create_table 'document_state_events', force: :cascade do |t|
+    t.integer 'document_state_id', null: false
+    t.integer 'document_id', null: false
+    t.string 'details'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['document_id'], name: 'index_document_state_events_on_document_id'
+    t.index ['document_state_id'], name: 'index_document_state_events_on_document_state_id'
+  end
+
   create_table 'document_states', force: :cascade do |t|
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+  end
+
+  create_table 'document_type_fields', force: :cascade do |t|
+    t.string 'name'
+    t.string 'object'
+    t.string 'property'
+    t.integer 'document_type_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['document_type_id'], name: 'index_document_type_fields_on_document_type_id'
+  end
+
+  create_table 'document_types', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+  end
+
+  create_table 'documents', force: :cascade do |t|
+    t.integer 'event_id'
+    t.integer 'client_id', null: false
+    t.integer 'document_type_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['client_id'], name: 'index_documents_on_client_id'
+    t.index ['document_type_id'], name: 'index_documents_on_document_type_id'
   end
 
   create_table 'events', force: :cascade do |t|
@@ -167,32 +218,6 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['client_id'], name: 'index_events_on_client_id'
-  end
-
-  create_table 'invoice_items', force: :cascade do |t|
-    t.integer 'invoice_id', null: false
-    t.integer 'item_id', null: false
-    t.integer 'item_type_id', null: false
-    t.decimal 'quantity'
-    t.integer 'discount'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['invoice_id'], name: 'index_invoice_items_on_invoice_id'
-    t.index ['item_id'], name: 'index_invoice_items_on_item_id'
-    t.index ['item_type_id'], name: 'index_invoice_items_on_item_type_id'
-  end
-
-  create_table 'invoices', force: :cascade do |t|
-    t.integer 'event_id'
-    t.integer 'client_id', null: false
-    t.datetime 'date_sent'
-    t.datetime 'date_due'
-    t.datetime 'date_paid'
-    t.integer 'document_state_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['client_id'], name: 'index_invoices_on_client_id'
-    t.index ['document_state_id'], name: 'index_invoices_on_document_state_id'
   end
 
   create_table 'item_types', force: :cascade do |t|
@@ -251,31 +276,6 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table 'quote_items', force: :cascade do |t|
-    t.integer 'quote_id', null: false
-    t.integer 'item_id', null: false
-    t.integer 'item_type_id', null: false
-    t.decimal 'quantity'
-    t.integer 'discount'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['item_id'], name: 'index_quote_items_on_item_id'
-    t.index ['item_type_id'], name: 'index_quote_items_on_item_type_id'
-    t.index ['quote_id'], name: 'index_quote_items_on_quote_id'
-  end
-
-  create_table 'quotes', force: :cascade do |t|
-    t.integer 'event_id'
-    t.integer 'client_id', null: false
-    t.datetime 'date_sent'
-    t.datetime 'date_expires'
-    t.integer 'document_state_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['client_id'], name: 'index_quotes_on_client_id'
-    t.index ['document_state_id'], name: 'index_quotes_on_document_state_id'
-  end
-
   create_table 'role_privileges', force: :cascade do |t|
     t.integer 'role_id', null: false
     t.string 'action'
@@ -320,28 +320,25 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   add_foreign_key 'asset_type_specifications', 'asset_types'
   add_foreign_key 'asset_type_specifications', 'specifications'
   add_foreign_key 'asset_types', 'multiplier_types'
+  add_foreign_key 'assets', 'asset_cases'
   add_foreign_key 'assets', 'asset_types'
-  add_foreign_key 'assets', 'cases'
   add_foreign_key 'clients', 'client_types'
   add_foreign_key 'contacts', 'clients'
   add_foreign_key 'crew_roles', 'crews'
   add_foreign_key 'crew_roles', 'roles'
+  add_foreign_key 'document_items', 'item_types'
+  add_foreign_key 'document_items', 'items'
+  add_foreign_key 'document_state_events', 'document_states'
+  add_foreign_key 'document_state_events', 'documents'
+  add_foreign_key 'document_type_fields', 'document_types'
+  add_foreign_key 'documents', 'clients'
+  add_foreign_key 'documents', 'document_types'
   add_foreign_key 'events', 'clients'
-  add_foreign_key 'invoice_items', 'invoices'
-  add_foreign_key 'invoice_items', 'item_types'
-  add_foreign_key 'invoice_items', 'items'
-  add_foreign_key 'invoices', 'clients'
-  add_foreign_key 'invoices', 'document_states'
   add_foreign_key 'maintenance_events', 'assets'
   add_foreign_key 'maintenance_events', 'maintenance_resolutions'
   add_foreign_key 'maintenance_events', 'maintenance_schedules'
   add_foreign_key 'maintenance_schedules', 'asset_types'
   add_foreign_key 'maintenance_schedules', 'maintenance_types'
-  add_foreign_key 'quote_items', 'item_types'
-  add_foreign_key 'quote_items', 'items'
-  add_foreign_key 'quote_items', 'quotes'
-  add_foreign_key 'quotes', 'clients'
-  add_foreign_key 'quotes', 'document_states'
   add_foreign_key 'role_privileges', 'roles'
   add_foreign_key 'shifts', 'crews'
   add_foreign_key 'shifts', 'events'

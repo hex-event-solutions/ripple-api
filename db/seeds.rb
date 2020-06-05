@@ -54,5 +54,10 @@ DocumentState.create(name: 'Expired')
 DocumentState.create(name: 'Invoiced')
 DocumentState.create(name: 'Paid')
 
+DocumentType.create(name: 'Quote')
+DocumentType.create(name: 'Invoice')
+DocumentType.create(name: 'PAT Report')
+DocumentType.create(name: 'Pick List')
+
 ItemType.create(name: 'Asset')
 ItemType.create(name: 'Line item')
