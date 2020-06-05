@@ -3,5 +3,8 @@
 class AssetCase < ApplicationRecord
   has_many :assets
 
-  validates :barcode, presence: true, length: { maximum: 16 }
+  belongs_to :company
+
+  validates :company, :barcode, presence: true
+  validates :barcode, length: { maximum: 16 }
 end

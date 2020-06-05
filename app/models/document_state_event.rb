@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class DocumentStateEvent < ApplicationRecord
+  belongs_to :company
   belongs_to :document
   belongs_to :document_state
 
-  validates :document_state, :document, presence: true
+  validates :company, :document_state, :document, presence: true
 end

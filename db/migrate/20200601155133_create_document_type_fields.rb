@@ -3,6 +3,7 @@
 class CreateDocumentTypeFields < ActiveRecord::Migration[6.0]
   def change
     create_table :document_type_fields do |t|
+      t.references :company, null: false, foreign_key: true
       t.string :name
       t.string :object
       t.string :property

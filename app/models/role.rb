@@ -5,5 +5,8 @@ class Role < ApplicationRecord
   has_many :crew, through: :crew_roles
   has_many :role_privileges
 
-  validates :name, presence: true, length: { maximum: 32 }, uniqueness: true
+  belongs_to :company
+
+  validates :company, :name, presence: true
+  validates :name, length: { maximum: 32 }, uniqueness: true
 end

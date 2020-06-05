@@ -3,6 +3,7 @@
 class CreateDocumentItems < ActiveRecord::Migration[6.0]
   def change
     create_table :document_items do |t|
+      t.references :company, null: false, foreign_key: true
       t.references :document, null: false
       t.references :item, null: false, foreign_key: true
       t.references :item_type, null: false, foreign_key: true

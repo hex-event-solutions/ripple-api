@@ -8,16 +8,29 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-ClientType.create(name: 'Individual')
-ClientType.create(name: 'Company')
+hex = Company.create(
+  name: 'Hex Event Solutions Limited',
+  company_number: '11299813',
+  address1: '72 Grove Road',
+  city: 'Chichester',
+  county: 'West Sussex',
+  postcode: 'PO18 8AP',
+  phone_number: '07817 026962',
+  logo: 'https://hexes.co.uk/static/media/logo-light.1f72cb05.png'
+)
+
+ClientType.create(company: hex, name: 'Individual')
+ClientType.create(company: hex, name: 'Company')
 
 MultiplierType.create(
+  company: hex,
   name: 'Daily',
   multiplier: 1,
   operand_quantity: 1,
   operand_type: 'day'
 )
 MultiplierType.create(
+  company: hex,
   name: 'Shortweekly',
   multiplier: 3,
   operand_quantity: 7,
@@ -25,39 +38,41 @@ MultiplierType.create(
 )
 
 MultiplierType.create(
+  company: hex,
   name: 'Weekly',
   multiplier: 1,
   operand_quantity: 1,
   operand_type: 'week'
 )
 MultiplierType.create(
+  company: hex,
   name: 'Monthly',
   multiplier: 1,
   operand_quantity: 1,
   operand_type: 'month'
 )
 
-MaintenanceType.create(name: 'PAT Test')
-MaintenanceType.create(name: 'Investigative')
-MaintenanceType.create(name: 'Preventative')
-MaintenanceType.create(name: 'Repair')
+MaintenanceType.create(company: hex, name: 'PAT Test')
+MaintenanceType.create(company: hex, name: 'Investigative')
+MaintenanceType.create(company: hex, name: 'Preventative')
+MaintenanceType.create(company: hex, name: 'Repair')
 
-MaintenanceResolution.create(name: 'Asset disposed of')
-MaintenanceResolution.create(name: 'Asset under inspection')
-MaintenanceResolution.create(name: 'Maintenance completed')
-MaintenanceResolution.create(name: 'Asset will not be repaired')
+MaintenanceResolution.create(company: hex, name: 'Asset disposed of')
+MaintenanceResolution.create(company: hex, name: 'Asset under inspection')
+MaintenanceResolution.create(company: hex, name: 'Maintenance completed')
+MaintenanceResolution.create(company: hex, name: 'Asset will not be repaired')
 
-DocumentState.create(name: 'Draft')
-DocumentState.create(name: 'Sent')
-DocumentState.create(name: 'Overdue')
-DocumentState.create(name: 'Expired')
-DocumentState.create(name: 'Invoiced')
-DocumentState.create(name: 'Paid')
+DocumentState.create(company: hex, name: 'Draft')
+DocumentState.create(company: hex, name: 'Sent')
+DocumentState.create(company: hex, name: 'Overdue')
+DocumentState.create(company: hex, name: 'Expired')
+DocumentState.create(company: hex, name: 'Invoiced')
+DocumentState.create(company: hex, name: 'Paid')
 
-DocumentType.create(name: 'Quote')
-DocumentType.create(name: 'Invoice')
-DocumentType.create(name: 'PAT Report')
-DocumentType.create(name: 'Pick List')
+DocumentType.create(company: hex, name: 'Quote')
+DocumentType.create(company: hex, name: 'Invoice')
+DocumentType.create(company: hex, name: 'PAT Report')
+DocumentType.create(company: hex, name: 'Pick List')
 
-ItemType.create(name: 'Asset')
-ItemType.create(name: 'Line item')
+ItemType.create(company: hex, name: 'Asset')
+ItemType.create(company: hex, name: 'Line item')

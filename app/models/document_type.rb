@@ -4,5 +4,8 @@ class DocumentType < ApplicationRecord
   has_many :documents
   has_many :document_type_fields
 
-  validates :name, presence: true, length: { maximum: 32 }, uniqueness: true
+  belongs_to :company
+
+  validates :company, :name, presence: true
+  validates :name, length: { maximum: 32 }, uniqueness: true
 end

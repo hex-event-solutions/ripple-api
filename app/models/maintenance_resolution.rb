@@ -3,5 +3,8 @@
 class MaintenanceResolution < ApplicationRecord
   has_many :maintenance_events
 
-  validates :name, presence: true, length: { maximum: 32 }, uniqueness: true
+  belongs_to :company
+
+  validates :company, :name, presence: true
+  validates :name, length: { maximum: 32 }, uniqueness: true
 end

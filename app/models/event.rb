@@ -8,9 +8,10 @@ class Event < ApplicationRecord
   has_many :asset_types, through: :asset_type_events
   has_many :shifts
 
+  belongs_to :company
   belongs_to :client
 
-  validates :client, :date_start, :date_end, :date_out, :date_return, :description, :location, presence: true
+  validates :company, :client, :date_start, :date_end, :date_out, :date_return, :description, :location, presence: true
   validate :dates_are_possible?
 
   def dates_are_possible?

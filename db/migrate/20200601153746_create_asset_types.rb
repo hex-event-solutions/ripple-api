@@ -3,6 +3,7 @@
 class CreateAssetTypes < ActiveRecord::Migration[6.0]
   def change
     create_table :asset_types do |t|
+      t.references :company, null: false, foreign_key: true
       t.decimal :cost
       t.decimal :rate
       t.references :multiplier_type, null: false, foreign_key: true
