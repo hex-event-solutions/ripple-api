@@ -52,6 +52,6 @@ jobs:
     - name: Run Reek
       run: bundle exec reek
     - name: Migrate DB
-      run: bundle exec rails db:setup RAILS_ENV=test
+      run: bundle exec rails db:migrate:reset RAILS_ENV=test
     - name: Run rspec
       run: bundle exec rspec
