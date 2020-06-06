@@ -8,6 +8,5 @@ module Types
 
     field :document, Types::DocumentType, null: false
     field :item, Types::ItemType, null: false
-    field :item_type, Types::ItemTypeType, null: false
   end
 end
