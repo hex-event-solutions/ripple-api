@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AssetType < ApplicationRecord
+  include Item
+
   has_many :assets
   has_many :asset_type_events
   has_many :events, through: :asset_type_events

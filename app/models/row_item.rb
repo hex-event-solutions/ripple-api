@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-class Item < ApplicationRecord
-  has_many :document_items
+class RowItem < ApplicationRecord
+  include Item
+
   has_many :documents, through: :document_items
 
   belongs_to :company

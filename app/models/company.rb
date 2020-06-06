@@ -22,8 +22,6 @@ class Company < ApplicationRecord
   has_many :document_types
   has_many :document_type_fields
   has_many :events
-  has_many :items
-  has_many :item_types
   has_many :maintenance_events
   has_many :maintenance_resolutions
   has_many :maintenance_schedules
@@ -31,6 +29,7 @@ class Company < ApplicationRecord
   has_many :multiplier_types
   has_many :roles
   has_many :role_privileges
+  has_many :row_items
   has_many :shifts
   has_many :specifications
 
