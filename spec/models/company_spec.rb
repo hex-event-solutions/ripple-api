@@ -36,8 +36,6 @@ RSpec.describe Company do
     it { should have_many(:document_types) }
     it { should have_many(:document_type_fields) }
     it { should have_many(:events) }
-    it { should have_many(:items) }
-    it { should have_many(:item_types) }
     it { should have_many(:maintenance_events) }
     it { should have_many(:maintenance_resolutions) }
     it { should have_many(:maintenance_schedules) }
@@ -45,6 +43,7 @@ RSpec.describe Company do
     it { should have_many(:multiplier_types) }
     it { should have_many(:roles) }
     it { should have_many(:role_privileges) }
+    it { should have_many(:row_items) }
     it { should have_many(:shifts) }
     it { should have_many(:specifications) }
   end

@@ -5,41 +5,41 @@ require 'faker'
 FactoryBot.define do
   factory :accessory do
     company
-    asset_type
-    association :accessory, factory: :asset_type
+    asset_type { create(:asset_type, company: company) }
+    accessory { create(:asset_type, company: company, multiplier_type: asset_type.multiplier_type) }
     quantity { Faker::Number.decimal(l_digits: 1) }
   end
 
   factory :asset_event do
     company
-    asset
-    event
+    asset { create(:asset, company: company) }
+    event { create(:event, company: company) }
   end
 
   factory :asset do
     company
-    asset_type
-    asset_case
+    asset_type { create(:asset_type, company: company) }
+    asset_case { create(:asset_case, company: company) }
     barcode { Faker::Internet.password }
   end
 
   factory :asset_type_category do
     company
-    asset_type
-    category
+    asset_type { create(:asset_type, company: company) }
+    category { create(:category, company: company) }
   end
 
   factory :asset_type_event do
     company
-    asset_type
-    event
+    asset_type { create(:asset_type, company: company) }
+    event { create(:event, company: company) }
     quantity { Faker::Number.decimal(l_digits: 2) }
     discount { Faker::Number.number(digits: 2) }
   end
 
   factory :asset_type do
     company
-    multiplier_type
+    multiplier_type { create(:multiplier_type, company: company) }
     cost { Faker::Number.decimal(l_digits: 2) }
     rate { Faker::Number.decimal(l_digits: 2) }
     display_on_website { Faker::Boolean.boolean }
@@ -51,8 +51,8 @@ FactoryBot.define do
 
   factory :asset_type_specification do
     company
-    asset_type
-    specification
+    asset_type { create(:asset_type, company: company) }
+    specification { create(:specification, company: company) }
     value { Faker::Verb.base }
   end
 
@@ -64,12 +64,12 @@ FactoryBot.define do
   factory :category do
     company
     name { 'Sound' }
-    parent { create(:category, name: 'Equipment', parent: nil) }
+    parent { create(:category, name: 'Equipment', parent: nil, company: company) }
   end
 
   factory :client do
     company
-    client_type
+    client_type { create(:client_type, company: company) }
     organisation_name { Faker::Company.name }
     address1 { Faker::Address.street_address }
     address2 { Faker::Address.secondary_address }
@@ -101,7 +101,7 @@ FactoryBot.define do
 
   factory :contact do
     company
-    client
+    client { create(:client, company: company) }
     name { Faker::Name.name }
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.cell_phone }
@@ -110,8 +110,8 @@ FactoryBot.define do
 
   factory :crew_role do
     company
-    crew
-    role
+    crew { create(:crew, company: company) }
+    role { create(:role, company: company) }
   end
 
   factory :crew do
@@ -125,18 +125,25 @@ FactoryBot.define do
 
   factory :document do
     company
-    client
-    event { create(:event, client: client) }
-    document_type
+    client { create(:client, company: company) }
+    event { create(:event, client: client, company: company) }
+    document_type { create(:document_type, company: company) }
   end
 
   factory :document_item do
     company
-    document
-    item
-    item_type
+    document { create(:document, company: company) }
+    for_row_item
     quantity { Faker::Number.decimal(l_digits: 2) }
     discount { Faker::Number.number(digits: 2) }
+
+    trait :for_row_item do
+      association :item, factory: :row_item
+    end
+
+    trait :for_asset_type do
+      association :item, factory: :asset_type
+    end
   end
 
   factory :document_state do
@@ -146,8 +153,8 @@ FactoryBot.define do
 
   factory :document_state_event do
     company
-    document_state
-    document
+    document_state { create(:document_state, company: company) }
+    document { create(:document, company: company) }
     details { Faker::Lorem.paragraph }
   end
 
@@ -158,7 +165,7 @@ FactoryBot.define do
 
   factory :document_type_field do
     company
-    document_type
+    document_type { create(:document_type, company: company) }
     name { ['Model', 'Manufacturer', 'Price', 'Cost', 'Test date'].sample }
     object { %w[MaintenanceEvent AssetType Event Accessory].sample }
     property { %w[model manufacturer price cost date_updated].sample }
@@ -166,7 +173,7 @@ FactoryBot.define do
 
   factory :event do
     company
-    client
+    client { create(:client, company: company) }
     date_start { Faker::Date.in_date_period(month: 1) }
     date_out { Faker::Date.in_date_period(month: 2) }
     date_return { Faker::Date.in_date_period(month: 3) }
@@ -176,22 +183,11 @@ FactoryBot.define do
     location { Faker::Lorem.paragraph }
   end
 
-  factory :item do
-    company
-    price { Faker::Number.decimal(l_digits: 2) }
-    description { Faker::Lorem.paragraph }
-  end
-
-  factory :item_type do
-    company
-    name { ['Asset', 'Line item'].sample }
-  end
-
   factory :maintenance_event do
     company
-    maintenance_schedule
-    maintenance_resolution
-    asset
+    maintenance_schedule { create(:maintenance_schedule, company: company) }
+    maintenance_resolution { create(:maintenance_resolution, company: company) }
+    asset { create(:asset, company: company) }
     details { Faker::Lorem.paragraph }
   end
 
@@ -209,8 +205,8 @@ FactoryBot.define do
 
   factory :maintenance_schedule do
     company
-    asset_type
-    maintenance_type
+    asset_type { create(:asset_type, company: company) }
+    maintenance_type { create(:maintenance_type, company: company) }
     details { Faker::Lorem.paragraph }
   end
 
@@ -229,7 +225,7 @@ FactoryBot.define do
 
   factory :role_privilege do
     company
-    role
+    role { create(:role, company: company) }
     action { %w[create read update delete].sample }
     resource { Faker::Movies::Hobbit.location }
   end
@@ -239,10 +235,16 @@ FactoryBot.define do
     name { Faker::Movies::Hobbit.character }
   end
 
+  factory :row_item do
+    company
+    price { Faker::Number.decimal(l_digits: 2) }
+    description { Faker::Lorem.paragraph }
+  end
+
   factory :shift do
     company
-    crew
-    event
+    crew { create(:crew, company: company) }
+    event { create(:event, company: company) }
     start { Faker::Date.in_date_period(month: 1) }
     finish { Faker::Date.in_date_period(month: 2) }
     rate { Faker::Number.decimal(l_digits: 2) }

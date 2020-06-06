@@ -7,7 +7,6 @@ RSpec.describe DocumentItem do
 
   describe 'fields' do
     it { should validate_presence_of(:item) }
-    it { should validate_presence_of(:item_type) }
     it { should validate_presence_of(:quantity) }
     it { should validate_presence_of(:discount) }
 
@@ -18,6 +17,5 @@ RSpec.describe DocumentItem do
   describe 'associations' do
     it { should belong_to(:document) }
     it { should belong_to(:item) }
-    it { should belong_to(:item_type) }
   end
 end

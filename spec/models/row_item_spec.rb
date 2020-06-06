@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Item do
-  subject { create :item }
+RSpec.describe RowItem do
+  subject { create :row_item }
 
   describe 'fields' do
     it { should validate_presence_of(:price) }
