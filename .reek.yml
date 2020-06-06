@@ -18,3 +18,4 @@ detectors:
 
 exclude_paths:
 - db/migrate
+- app/graphql

@@ -13,9 +13,13 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20_200_601_155_750) do
-  create_table 'accessories', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'asset_type_id', null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension 'pgcrypto'
+  enable_extension 'plpgsql'
+
+  create_table 'accessories', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'asset_type_id', null: false
     t.integer 'accessory_asset_type_id'
     t.decimal 'quantity'
     t.datetime 'created_at', precision: 6, null: false
@@ -24,18 +28,18 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_accessories_on_company_id'
   end
 
-  create_table 'asset_cases', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'asset_cases', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'barcode'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_asset_cases_on_company_id'
   end
 
-  create_table 'asset_events', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'asset_id', null: false
-    t.integer 'event_id', null: false
+  create_table 'asset_events', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'asset_id', null: false
+    t.uuid 'event_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['asset_id'], name: 'index_asset_events_on_asset_id'
@@ -43,10 +47,10 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['event_id'], name: 'index_asset_events_on_event_id'
   end
 
-  create_table 'asset_type_categories', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'asset_type_id', null: false
-    t.integer 'category_id', null: false
+  create_table 'asset_type_categories', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'asset_type_id', null: false
+    t.uuid 'category_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['asset_type_id'], name: 'index_asset_type_categories_on_asset_type_id'
@@ -54,10 +58,10 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_asset_type_categories_on_company_id'
   end
 
-  create_table 'asset_type_events', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'asset_type_id', null: false
-    t.integer 'event_id', null: false
+  create_table 'asset_type_events', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'asset_type_id', null: false
+    t.uuid 'event_id', null: false
     t.decimal 'quantity'
     t.integer 'discount'
     t.datetime 'created_at', precision: 6, null: false
@@ -67,10 +71,10 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['event_id'], name: 'index_asset_type_events_on_event_id'
   end
 
-  create_table 'asset_type_specifications', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'asset_type_id', null: false
-    t.integer 'specification_id', null: false
+  create_table 'asset_type_specifications', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'asset_type_id', null: false
+    t.uuid 'specification_id', null: false
     t.string 'value'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
@@ -79,11 +83,11 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['specification_id'], name: 'index_asset_type_specifications_on_specification_id'
   end
 
-  create_table 'asset_types', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'asset_types', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.decimal 'cost'
     t.decimal 'rate'
-    t.integer 'multiplier_type_id', null: false
+    t.uuid 'multiplier_type_id', null: false
     t.boolean 'display_on_website'
     t.string 'manufacturer'
     t.string 'model'
@@ -95,11 +99,11 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['multiplier_type_id'], name: 'index_asset_types_on_multiplier_type_id'
   end
 
-  create_table 'assets', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'asset_type_id', null: false
+  create_table 'assets', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'asset_type_id', null: false
     t.string 'barcode'
-    t.integer 'asset_case_id', null: false
+    t.uuid 'asset_case_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['asset_case_id'], name: 'index_assets_on_asset_case_id'
@@ -107,27 +111,27 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_assets_on_company_id'
   end
 
-  create_table 'categories', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'categories', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.string 'fullname'
-    t.integer 'parent_id'
+    t.uuid 'parent_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_categories_on_company_id'
     t.index ['parent_id'], name: 'index_categories_on_parent_id'
   end
 
-  create_table 'client_types', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'client_types', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_client_types_on_company_id'
   end
 
-  create_table 'clients', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'clients', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'organisation_name'
     t.string 'address1'
     t.string 'address2'
@@ -135,7 +139,7 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.string 'city'
     t.string 'county'
     t.string 'postcode'
-    t.integer 'client_type_id', null: false
+    t.uuid 'client_type_id', null: false
     t.integer 'discount'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
@@ -143,7 +147,7 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_clients_on_company_id'
   end
 
-  create_table 'companies', force: :cascade do |t|
+  create_table 'companies', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.string 'name'
     t.string 'vat_number'
     t.string 'company_number'
@@ -159,9 +163,9 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table 'contacts', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'client_id', null: false
+  create_table 'contacts', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'client_id', null: false
     t.string 'name'
     t.string 'email'
     t.string 'phone'
@@ -172,10 +176,10 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_contacts_on_company_id'
   end
 
-  create_table 'crew_roles', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'crew_id', null: false
-    t.integer 'role_id', null: false
+  create_table 'crew_roles', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'crew_id', null: false
+    t.uuid 'role_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_crew_roles_on_company_id'
@@ -183,8 +187,8 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['role_id'], name: 'index_crew_roles_on_role_id'
   end
 
-  create_table 'crews', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'crews', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.string 'email'
     t.decimal 'rate'
@@ -195,25 +199,24 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_crews_on_company_id'
   end
 
-  create_table 'document_items', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'document_id', null: false
-    t.integer 'item_id', null: false
-    t.integer 'item_type_id', null: false
+  create_table 'document_items', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'document_id', null: false
+    t.string 'item_type', null: false
+    t.uuid 'item_id', null: false
     t.decimal 'quantity'
     t.integer 'discount'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_document_items_on_company_id'
     t.index ['document_id'], name: 'index_document_items_on_document_id'
-    t.index ['item_id'], name: 'index_document_items_on_item_id'
-    t.index ['item_type_id'], name: 'index_document_items_on_item_type_id'
+    t.index %w[item_type item_id], name: 'index_document_items_on_item_type_and_item_id'
   end
 
-  create_table 'document_state_events', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'document_state_id', null: false
-    t.integer 'document_id', null: false
+  create_table 'document_state_events', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'document_state_id', null: false
+    t.uuid 'document_id', null: false
     t.string 'details'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
@@ -222,39 +225,39 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['document_state_id'], name: 'index_document_state_events_on_document_state_id'
   end
 
-  create_table 'document_states', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'document_states', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_document_states_on_company_id'
   end
 
-  create_table 'document_type_fields', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'document_type_fields', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.string 'object'
     t.string 'property'
-    t.integer 'document_type_id', null: false
+    t.uuid 'document_type_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_document_type_fields_on_company_id'
     t.index ['document_type_id'], name: 'index_document_type_fields_on_document_type_id'
   end
 
-  create_table 'document_types', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'document_types', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_document_types_on_company_id'
   end
 
-  create_table 'documents', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'documents', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.integer 'event_id'
-    t.integer 'client_id', null: false
-    t.integer 'document_type_id', null: false
+    t.uuid 'client_id', null: false
+    t.uuid 'document_type_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['client_id'], name: 'index_documents_on_client_id'
@@ -262,13 +265,13 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['document_type_id'], name: 'index_documents_on_document_type_id'
   end
 
-  create_table 'events', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'events', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.datetime 'date_start'
     t.datetime 'date_end'
     t.datetime 'date_out'
     t.datetime 'date_return'
-    t.integer 'client_id', null: false
+    t.uuid 'client_id', null: false
     t.string 'description'
     t.text 'details'
     t.text 'location'
@@ -278,29 +281,12 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_events_on_company_id'
   end
 
-  create_table 'item_types', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.string 'name'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['company_id'], name: 'index_item_types_on_company_id'
-  end
-
-  create_table 'items', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.decimal 'price'
-    t.string 'description'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['company_id'], name: 'index_items_on_company_id'
-  end
-
-  create_table 'maintenance_events', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'maintenance_schedule_id', null: false
-    t.integer 'asset_id', null: false
+  create_table 'maintenance_events', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'maintenance_schedule_id', null: false
+    t.uuid 'asset_id', null: false
     t.text 'details'
-    t.integer 'maintenance_resolution_id', null: false
+    t.uuid 'maintenance_resolution_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['asset_id'], name: 'index_maintenance_events_on_asset_id'
@@ -309,18 +295,18 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['maintenance_schedule_id'], name: 'index_maintenance_events_on_maintenance_schedule_id'
   end
 
-  create_table 'maintenance_resolutions', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'maintenance_resolutions', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_maintenance_resolutions_on_company_id'
   end
 
-  create_table 'maintenance_schedules', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'asset_type_id', null: false
-    t.integer 'maintenance_type_id', null: false
+  create_table 'maintenance_schedules', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'asset_type_id', null: false
+    t.uuid 'maintenance_type_id', null: false
     t.text 'details'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
@@ -329,16 +315,16 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['maintenance_type_id'], name: 'index_maintenance_schedules_on_maintenance_type_id'
   end
 
-  create_table 'maintenance_types', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'maintenance_types', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_maintenance_types_on_company_id'
   end
 
-  create_table 'multiplier_types', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'multiplier_types', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.decimal 'multiplier'
     t.string 'operand_type'
@@ -348,9 +334,9 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_multiplier_types_on_company_id'
   end
 
-  create_table 'role_privileges', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'role_id', null: false
+  create_table 'role_privileges', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'role_id', null: false
     t.string 'action'
     t.string 'resource'
     t.datetime 'created_at', precision: 6, null: false
@@ -359,18 +345,27 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['role_id'], name: 'index_role_privileges_on_role_id'
   end
 
-  create_table 'roles', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'roles', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['company_id'], name: 'index_roles_on_company_id'
   end
 
-  create_table 'shifts', force: :cascade do |t|
-    t.integer 'company_id', null: false
-    t.integer 'crew_id', null: false
-    t.integer 'event_id', null: false
+  create_table 'row_items', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.decimal 'price'
+    t.string 'description'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['company_id'], name: 'index_row_items_on_company_id'
+  end
+
+  create_table 'shifts', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'crew_id', null: false
+    t.uuid 'event_id', null: false
     t.datetime 'start'
     t.datetime 'finish'
     t.decimal 'rate'
@@ -382,8 +377,8 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['event_id'], name: 'index_shifts_on_event_id'
   end
 
-  create_table 'specifications', force: :cascade do |t|
-    t.integer 'company_id', null: false
+  create_table 'specifications', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
@@ -421,8 +416,6 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   add_foreign_key 'crew_roles', 'roles'
   add_foreign_key 'crews', 'companies'
   add_foreign_key 'document_items', 'companies'
-  add_foreign_key 'document_items', 'item_types'
-  add_foreign_key 'document_items', 'items'
   add_foreign_key 'document_state_events', 'companies'
   add_foreign_key 'document_state_events', 'document_states'
   add_foreign_key 'document_state_events', 'documents'
@@ -435,8 +428,6 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   add_foreign_key 'documents', 'document_types'
   add_foreign_key 'events', 'clients'
   add_foreign_key 'events', 'companies'
-  add_foreign_key 'item_types', 'companies'
-  add_foreign_key 'items', 'companies'
   add_foreign_key 'maintenance_events', 'assets'
   add_foreign_key 'maintenance_events', 'companies'
   add_foreign_key 'maintenance_events', 'maintenance_resolutions'
@@ -450,6 +441,7 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   add_foreign_key 'role_privileges', 'companies'
   add_foreign_key 'role_privileges', 'roles'
   add_foreign_key 'roles', 'companies'
+  add_foreign_key 'row_items', 'companies'
   add_foreign_key 'shifts', 'companies'
   add_foreign_key 'shifts', 'crews'
   add_foreign_key 'shifts', 'events'
