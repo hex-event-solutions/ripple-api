@@ -73,6 +73,4 @@ DocumentType.create(company: hex, name: 'Quote')
 DocumentType.create(company: hex, name: 'Invoice')
 DocumentType.create(company: hex, name: 'PAT Report')
 DocumentType.create(company: hex, name: 'Pick List')
-
-ItemType.create(company: hex, name: 'Asset')
-ItemType.create(company: hex, name: 'Line item')
+DocumentType.create(company: hex, name: 'Maintenance History')
