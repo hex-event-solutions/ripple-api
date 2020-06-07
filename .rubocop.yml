@@ -37,3 +37,11 @@ Metrics/BlockLength:
   Exclude:
     - db/schema.rb
     - spec/**/*
+
+Layout/LineLength:
+  Exclude:
+    - db/seeds.rb
+
+Lint/UselessAssignment:
+  Exclude:
+    - db/seeds.rb
