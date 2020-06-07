@@ -1,24 +1,10 @@
-# README
+# Ripple
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ripple is a platform designed from the ground up for the live event industry. It is capable of event management,
+client communications and asset organisation, among many other things.
 
-Things you may want to cover:
+The API is a Ruby on Rails application, providing a GraphQL interface for object manipulation
 
-* Ruby version
+## Issues and Feature Requests
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Please do open an issue with any feature requests or bugs you encounter
