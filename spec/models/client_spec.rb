@@ -19,7 +19,7 @@ RSpec.describe Client, type: :model do
 
     it { should validate_numericality_of(:discount) }
 
-    it { should validate_uniqueness_of(:organisation_name) }
+    it { should validate_uniqueness_of(:organisation_name).scoped_to(:company) }
   end
 
   describe 'associations' do

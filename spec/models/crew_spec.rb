@@ -14,8 +14,8 @@ RSpec.describe Crew do
     it { should validate_length_of(:name).is_at_most(128) }
     it { should validate_length_of(:email).is_at_most(255) }
 
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_uniqueness_of(:email) }
+    it { should validate_uniqueness_of(:name).scoped_to(:company) }
+    it { should validate_uniqueness_of(:email).scoped_to(:company) }
 
     it { should validate_numericality_of(:rate) }
     it { should validate_numericality_of(:price) }

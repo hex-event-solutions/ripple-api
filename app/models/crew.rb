@@ -10,7 +10,7 @@ class Crew < ApplicationRecord
   has_secure_password
 
   validates :company, :name, :email, :rate, :price, presence: true
-  validates :name, length: { maximum: 128 }, uniqueness: true
-  validates :email, length: { maximum: 255 }, uniqueness: true
+  validates :name, length: { maximum: 128 }, uniqueness: { scope: :company }
+  validates :email, length: { maximum: 255 }, uniqueness: { scope: :company }
   validates :rate, :price, numericality: true
 end

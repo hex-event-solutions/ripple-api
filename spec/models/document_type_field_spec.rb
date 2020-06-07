@@ -7,7 +7,7 @@ RSpec.describe DocumentTypeField do
 
   describe 'fields' do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:object) }
+    it { should validate_presence_of(:resource) }
     it { should validate_presence_of(:property) }
     it { should validate_presence_of(:document_type) }
 

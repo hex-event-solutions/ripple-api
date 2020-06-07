@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class ClientType < ApplicationRecord
-  has_many :clients
+class ItemType < ApplicationRecord
+  has_many :document_items
 
   belongs_to :company
 

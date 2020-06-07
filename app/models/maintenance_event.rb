@@ -6,5 +6,5 @@ class MaintenanceEvent < ApplicationRecord
   belongs_to :maintenance_resolution
   belongs_to :asset
 
-  validates :company, :maintenance_schedule, :asset, :details, :maintenance_resolution, presence: true
+  validates :company, :maintenance_schedule, :asset, :maintenance_resolution, presence: true
 end

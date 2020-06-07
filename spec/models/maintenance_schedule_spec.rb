@@ -8,7 +8,10 @@ RSpec.describe MaintenanceSchedule do
   describe 'fields' do
     it { should validate_presence_of(:asset_type) }
     it { should validate_presence_of(:maintenance_type) }
-    it { should validate_presence_of(:details) }
+    it { should validate_presence_of(:repeat_multiplier) }
+    it { should validate_presence_of(:repeat_period) }
+
+    it { should validate_numericality_of(:repeat_multiplier) }
   end
 
   describe 'associations' do

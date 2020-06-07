@@ -7,8 +7,8 @@ class Asset < ApplicationRecord
 
   belongs_to :company
   belongs_to :asset_type
-  belongs_to :asset_case
+  belongs_to :asset_case, optional: true
 
-  validates :company, :asset_type, :asset_case, :barcode, presence: true
+  validates :company, :asset_type, :barcode, presence: true
   validates :barcode, length: { maximum: 16 }
 end
