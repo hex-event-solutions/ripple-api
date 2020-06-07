@@ -167,7 +167,7 @@ FactoryBot.define do
     company
     document_type { create(:document_type, company: company) }
     name { ['Model', 'Manufacturer', 'Price', 'Cost', 'Test date'].sample }
-    object { %w[MaintenanceEvent AssetType Event Accessory].sample }
+    resource { %w[MaintenanceEvent AssetType Event Accessory].sample }
     property { %w[model manufacturer price cost date_updated].sample }
   end
 
