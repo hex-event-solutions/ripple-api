@@ -7,6 +7,8 @@ class CreateMaintenanceSchedules < ActiveRecord::Migration[6.0]
       t.references :asset_type, type: :uuid, null: false, foreign_key: true
       t.references :maintenance_type, type: :uuid, null: false, foreign_key: true
       t.text :details
+      t.integer :repeat_multiplier
+      t.string :repeat_period
 
       t.timestamps
     end
