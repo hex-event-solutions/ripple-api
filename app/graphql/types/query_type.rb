@@ -5,27 +5,26 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :asset_types, [Types::AssetTypeType], null: false, description: 'Returns all asset types'
-    field :asset_cases, [Types::AssetCaseType], null: false, description: 'Returns all asset cases'
-    field :assets, [Types::AssetType], null: false, description: 'Returns all assets'
-    field :categories, [Types::CategoryType], null: false, description: 'Returns all categories'
-    field :client_types, [Types::ClientTypeType], null: false, description: 'Returns all client types'
-    field :clients, [Types::ClientType], null: false, description: 'Returns all clients'
-    field :crew, [Types::CrewType], null: false, description: 'Returns all crew'
-    field :document_states, [Types::DocumentStateType], null: false, description: 'Returns all document states'
-    field :document_types, [Types::DocumentTypeType], null: false, description: 'Returns all document types'
-    field :documents, [Types::DocumentType], null: false, description: 'Returns all documents'
-    field :events, [Types::EventType], null: false, description: 'Returns all events'
-    field :item_types, [Types::ItemTypeType], null: false, description: 'Returns all item types'
-    field :items, [Types::ItemType], null: false, description: 'Returns all items'
+    field :asset_types, [Types::RippleAssetTypeType], null: false, description: 'Returns all asset types'
+    field :asset_cases, [Types::RippleAssetCaseType], null: false, description: 'Returns all asset cases'
+    field :assets, [Types::RippleAssetType], null: false, description: 'Returns all assets'
+    field :categories, [Types::RippleCategoryType], null: false, description: 'Returns all categories'
+    field :client_types, [Types::RippleClientTypeType], null: false, description: 'Returns all client types'
+    field :clients, [Types::RippleClientType], null: false, description: 'Returns all clients'
+    field :crew, [Types::RippleCrewType], null: false, description: 'Returns all crew'
+    field :document_states, [Types::RippleDocumentStateType], null: false, description: 'Returns all document states'
+    field :document_types, [Types::RippleDocumentTypeType], null: false, description: 'Returns all document types'
+    field :documents, [Types::RippleDocumentType], null: false, description: 'Returns all documents'
+    field :events, [Types::RippleEventType], null: false, description: 'Returns all events'
     field :maintenance_resolutions,
-          [Types::MaintenanceResolutionType],
+          [Types::RippleMaintenanceResolutionType],
           null: false,
           description: 'Returns all maintenance resolutions'
-    field :maintenance_types, [Types::MaintenanceTypeType], null: false, description: 'Returns all maintenance types'
-    field :multiplier_types, [Types::MultiplierType], null: false, description: 'Returns all multiplier types'
-    field :roles, [Types::RoleType], null: false, description: 'Returns all roles'
-    field :specifications, [Types::SpecificationType], null: false, description: 'Returns all specificaions'
+    field :maintenance_types, [Types::RippleMaintenanceTypeType], null: false, description: 'Returns all maintenance types'
+    field :multiplier_types, [Types::RippleMultiplierTypeType], null: false, description: 'Returns all multiplier types'
+    field :roles, [Types::RippleRoleType], null: false, description: 'Returns all roles'
+    field :row_items, [Types::RippleRowItemType], null: false, description: 'Returns all  row items'
+    field :specifications, [Types::RippleSpecificationType], null: false, description: 'Returns all specificaions'
 
     def asset_types
       AssetType.all
@@ -71,14 +70,6 @@ module Types
       Event.all
     end
 
-    def item_types
-      ItemType.all
-    end
-
-    def items
-      Item.all
-    end
-
     def maintenance_resolutions
       MaintenanceResolution.all
     end
@@ -93,6 +84,10 @@ module Types
 
     def roles
       Role.all
+    end
+
+    def row_items
+      RowItem.all
     end
 
     def specifications
