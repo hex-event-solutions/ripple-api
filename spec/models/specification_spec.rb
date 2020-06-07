@@ -10,7 +10,7 @@ RSpec.describe Specification do
 
     it { should validate_length_of(:name).is_at_most(32) }
 
-    it { should validate_uniqueness_of(:name).scoped_to(:company) }
+    it { should validate_uniqueness_of(:name).scoped_to(:company_id) }
   end
 
   describe 'associations' do

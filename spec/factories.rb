@@ -208,6 +208,8 @@ FactoryBot.define do
     asset_type { create(:asset_type, company: company) }
     maintenance_type { create(:maintenance_type, company: company) }
     details { Faker::Lorem.paragraph }
+    repeat_period { %w[day week month year].sample }
+    repeat_multiplier { [1, 2, 3, 4].sample }
   end
 
   factory :maintenance_type do

@@ -11,10 +11,22 @@ RSpec.describe Category do
     it { should validate_length_of(:name).is_at_most(32) }
 
     describe 'validates uniqueness of fullname' do
-      let(:category) { create(:category, parent: subject.parent) }
+      describe 'in the same company' do
+        let!(:category1) { create(:category, company: subject.company, name: 'Frog', parent: nil) }
+        let!(:category2) { build(:category, company: subject.company, name: 'Frog', parent: nil) }
 
-      it 'raises an error if not unique' do
-        expect { category.save }.to raise_error(ActiveRecord::RecordInvalid)
+        it 'raises an error if not unique' do
+          expect { category2.save! }.to raise_error(ActiveRecord::RecordInvalid)
+        end
+      end
+
+      describe 'in different companies' do
+        let!(:category1) { create(:category, name: 'Frog', parent: nil) }
+        let!(:category2) { build(:category, name: 'Frog', parent: nil) }
+
+        it 'does not raise an error with the same name' do
+          expect { category2.save! }.not_to raise_error
+        end
       end
     end
   end

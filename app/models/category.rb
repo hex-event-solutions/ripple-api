@@ -13,7 +13,7 @@ class Category < ApplicationRecord
 
   validates :company, :name, presence: true
   validates :name, length: { maximum: 32 }
-  validates :fullname, uniqueness: { scope: :company }
+  validates :fullname, uniqueness: { scope: :company_id }
 
   # private
 

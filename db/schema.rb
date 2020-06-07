@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.uuid 'company_id', null: false
     t.uuid 'asset_type_id', null: false
     t.string 'barcode'
-    t.uuid 'asset_case_id', null: false
+    t.uuid 'asset_case_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['asset_case_id'], name: 'index_assets_on_asset_case_id'
@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   create_table 'document_type_fields', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.uuid 'company_id', null: false
     t.string 'name'
-    t.string 'object'
+    t.string 'resource'
     t.string 'property'
     t.uuid 'document_type_id', null: false
     t.datetime 'created_at', precision: 6, null: false
@@ -255,7 +255,7 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
 
   create_table 'documents', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.uuid 'company_id', null: false
-    t.integer 'event_id'
+    t.uuid 'event_id'
     t.uuid 'client_id', null: false
     t.uuid 'document_type_id', null: false
     t.datetime 'created_at', precision: 6, null: false
@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['client_id'], name: 'index_documents_on_client_id'
     t.index ['company_id'], name: 'index_documents_on_company_id'
     t.index ['document_type_id'], name: 'index_documents_on_document_type_id'
+    t.index ['event_id'], name: 'index_documents_on_event_id'
   end
 
   create_table 'events', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
@@ -308,6 +309,8 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.uuid 'asset_type_id', null: false
     t.uuid 'maintenance_type_id', null: false
     t.text 'details'
+    t.integer 'repeat_multiplier'
+    t.string 'repeat_period'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['asset_type_id'], name: 'index_maintenance_schedules_on_asset_type_id'
@@ -426,6 +429,7 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   add_foreign_key 'documents', 'clients'
   add_foreign_key 'documents', 'companies'
   add_foreign_key 'documents', 'document_types'
+  add_foreign_key 'documents', 'events'
   add_foreign_key 'events', 'clients'
   add_foreign_key 'events', 'companies'
   add_foreign_key 'maintenance_events', 'assets'

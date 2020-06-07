@@ -7,5 +7,5 @@ class Specification < ApplicationRecord
   belongs_to :company
 
   validates :company, :name, presence: true
-  validates :name, length: { maximum: 32 }, uniqueness: { scope: :company }
+  validates :name, length: { maximum: 32 }, uniqueness: { scope: :company_id }
 end

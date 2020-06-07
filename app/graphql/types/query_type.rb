@@ -20,7 +20,10 @@ module Types
           [Types::RippleMaintenanceResolutionType],
           null: false,
           description: 'Returns all maintenance resolutions'
-    field :maintenance_types, [Types::RippleMaintenanceTypeType], null: false, description: 'Returns all maintenance types'
+    field :maintenance_types,
+          [Types::RippleMaintenanceTypeType],
+          null: false,
+          description: 'Returns all maintenance types'
     field :multiplier_types, [Types::RippleMultiplierTypeType], null: false, description: 'Returns all multiplier types'
     field :roles, [Types::RippleRoleType], null: false, description: 'Returns all roles'
     field :row_items, [Types::RippleRowItemType], null: false, description: 'Returns all  row items'
