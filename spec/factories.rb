@@ -108,12 +108,6 @@ FactoryBot.define do
     details { Faker::Lorem.paragraph }
   end
 
-  factory :crew_role do
-    company
-    crew { create(:crew, company: company) }
-    role { create(:role, company: company) }
-  end
-
   factory :crew do
     company
     name { Faker::Name.name }
@@ -223,18 +217,6 @@ FactoryBot.define do
     multiplier { Faker::Number.decimal(l_digits: 2) }
     operand_type { %w[day week month year].sample }
     operand_quantity { Faker::Number.decimal(l_digits: 2) }
-  end
-
-  factory :role_privilege do
-    company
-    role { create(:role, company: company) }
-    action { %w[create read update delete].sample }
-    resource { Faker::Movies::Hobbit.location }
-  end
-
-  factory :role do
-    company
-    name { Faker::Movies::Hobbit.character }
   end
 
   factory :row_item do

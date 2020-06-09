@@ -22,7 +22,6 @@ RSpec.describe Crew do
   end
 
   describe 'associations' do
-    it { should have_many(:crew_roles) }
     it { should have_many(:shifts) }
   end
 end
