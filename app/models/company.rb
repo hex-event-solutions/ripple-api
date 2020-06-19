@@ -14,7 +14,6 @@ class Company < ApplicationRecord
   has_many :client_types
   has_many :contacts
   has_many :crews
-  has_many :crew_roles
   has_many :documents
   has_many :document_items
   has_many :document_states
@@ -27,8 +26,6 @@ class Company < ApplicationRecord
   has_many :maintenance_schedules
   has_many :maintenance_types
   has_many :multiplier_types
-  has_many :roles
-  has_many :role_privileges
   has_many :row_items
   has_many :shifts
   has_many :specifications
