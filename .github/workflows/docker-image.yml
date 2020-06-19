@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag registry.digitalocean.com/hex-registry/ripple/api:latest
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2.0.0
+      with:
+        # DigitalOcean API Token
+        token: ${{ secrets.DIGITALOCEAN_DOCTL }}
+    - name: Log in to registry
+      run: doctl registry login
+    - name: Push latest image
+      run: docker push registry.digitalocean.com/hex-registry/ripple/api:latest
