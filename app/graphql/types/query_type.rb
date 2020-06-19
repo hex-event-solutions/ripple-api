@@ -26,75 +26,75 @@ module Types
           description: 'Returns all maintenance types'
     field :multiplier_types, [Types::RippleMultiplierTypeType], null: false, description: 'Returns all multiplier types'
     field :roles, [Types::RippleRoleType], null: false, description: 'Returns all roles'
-    field :row_items, [Types::RippleRowItemType], null: false, description: 'Returns all  row items'
+    field :row_items, [Types::RippleRowItemType], null: false, description: 'Returns all row items'
     field :specifications, [Types::RippleSpecificationType], null: false, description: 'Returns all specificaions'
 
     def asset_types
-      AssetType.all
+      AssetType.where(company_id: context[:company_id])
     end
 
     def asset_cases
-      AssetCase.all
+      AssetCase.where(company_id: context[:company_id])
     end
 
     def assets
-      Asset.all
+      Asset.where(company_id: context[:company_id])
     end
 
     def categories
-      Category.all
+      Category.where(company_id: context[:company_id])
     end
 
     def client_types
-      ClientType.all
+      ClientType.where(company_id: context[:company_id])
     end
 
     def clients
-      Client.all
+      Client.where(company_id: context[:company_id])
     end
 
     def crew
-      Crew.all
+      Crew.where(company_id: context[:company_id])
     end
 
     def document_states
-      DocumentState.all
+      DocumentState.where(company_id: context[:company_id])
     end
 
     def document_types
-      DocumentType.all
+      DocumentType.where(company_id: context[:company_id])
     end
 
     def documents
-      Document.all
+      Document.where(company_id: context[:company_id])
     end
 
     def events
-      Event.all
+      Event.where(company_id: context[:company_id])
     end
 
     def maintenance_resolutions
-      MaintenanceResolution.all
+      MaintenanceResolution.where(company_id: context[:company_id])
     end
 
     def maintenance_types
-      MaintenanceType.all
+      MaintenanceType.where(company_id: context[:company_id])
     end
 
     def multiplier_types
-      MultiplierType.all
+      MultiplierType.where(company_id: context[:company_id])
     end
 
     def roles
-      Role.all
+      Role.where(company_id: context[:company_id])
     end
 
     def row_items
-      RowItem.all
+      RowItem.where(company_id: context[:company_id])
     end
 
     def specifications
-      Specification.all
+      Specification.where(company_id: context[:company_id])
     end
   end
 end
