@@ -21,21 +21,21 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-  username: assetmanagement
-  password: password
-  host: db
-  port: 5432
+  username: <%= ENV.fetch("POSTGRES_USER") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  host: <%= ENV.fetch("POSTGRES_HOST") %>
+  port: <%= ENV.fetch("POSTGRES_PORT") %>
 
 development:
   <<: *default
-  database: assetmanagement_development
+  database: ripple-api_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: assetmanagement_test
+  database: ripple-api_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -58,6 +58,4 @@ test:
 #
 production:
   <<: *default
-  database: assetmanagement_production
-  username: assetmanagement
-  password: <%= ENV['ASSETMANAGEMENT_DATABASE_PASSWORD'] %>
+  database: ripple-api_production
