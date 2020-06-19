@@ -176,17 +176,6 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_contacts_on_company_id'
   end
 
-  create_table 'crew_roles', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
-    t.uuid 'company_id', null: false
-    t.uuid 'crew_id', null: false
-    t.uuid 'role_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['company_id'], name: 'index_crew_roles_on_company_id'
-    t.index ['crew_id'], name: 'index_crew_roles_on_crew_id'
-    t.index ['role_id'], name: 'index_crew_roles_on_role_id'
-  end
-
   create_table 'crews', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.uuid 'company_id', null: false
     t.string 'name'
@@ -337,25 +326,6 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
     t.index ['company_id'], name: 'index_multiplier_types_on_company_id'
   end
 
-  create_table 'role_privileges', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
-    t.uuid 'company_id', null: false
-    t.uuid 'role_id', null: false
-    t.string 'action'
-    t.string 'resource'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['company_id'], name: 'index_role_privileges_on_company_id'
-    t.index ['role_id'], name: 'index_role_privileges_on_role_id'
-  end
-
-  create_table 'roles', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
-    t.uuid 'company_id', null: false
-    t.string 'name'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['company_id'], name: 'index_roles_on_company_id'
-  end
-
   create_table 'row_items', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.uuid 'company_id', null: false
     t.decimal 'price'
@@ -414,9 +384,6 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   add_foreign_key 'clients', 'companies'
   add_foreign_key 'contacts', 'clients'
   add_foreign_key 'contacts', 'companies'
-  add_foreign_key 'crew_roles', 'companies'
-  add_foreign_key 'crew_roles', 'crews'
-  add_foreign_key 'crew_roles', 'roles'
   add_foreign_key 'crews', 'companies'
   add_foreign_key 'document_items', 'companies'
   add_foreign_key 'document_state_events', 'companies'
@@ -442,9 +409,6 @@ ActiveRecord::Schema.define(version: 20_200_601_155_750) do
   add_foreign_key 'maintenance_schedules', 'maintenance_types'
   add_foreign_key 'maintenance_types', 'companies'
   add_foreign_key 'multiplier_types', 'companies'
-  add_foreign_key 'role_privileges', 'companies'
-  add_foreign_key 'role_privileges', 'roles'
-  add_foreign_key 'roles', 'companies'
   add_foreign_key 'row_items', 'companies'
   add_foreign_key 'shifts', 'companies'
   add_foreign_key 'shifts', 'crews'

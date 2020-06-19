@@ -80,18 +80,6 @@ event = Event.create!(company: hex, client: asu, date_start: Time.now, date_out:
 ollie = Crew.create!(company: hex, name: 'Ollie Nye', email: 'ollie@hexes.co.uk', password: '1234567890', rate: 9, price: 12)
 josh = Crew.create!(company: hex, name: 'Josh Lowe', email: 'josh@hexes.co.uk', password: '1234567890', rate: 9, price: 12)
 
-admin = Role.create!(company: hex, name: 'Admin')
-contractor = Role.create!(company: hex, name: 'Contractor')
-
-RolePrivilege.create!(company: hex, role: admin, resource: 'event', action: 'create!')
-RolePrivilege.create!(company: hex, role: admin, resource: 'event', action: 'read')
-RolePrivilege.create!(company: hex, role: admin, resource: 'event', action: 'update')
-RolePrivilege.create!(company: hex, role: admin, resource: 'event', action: 'delete')
-RolePrivilege.create!(company: hex, role: contractor, resource: 'event', action: 'read')
-
-CrewRole.create!(company: hex, crew: ollie, role: admin)
-CrewRole.create!(company: hex, crew: josh, role: contractor)
-
 Shift.create!(company: hex, event: event, crew: ollie, start: Time.now, finish: Time.now + 1.hours, rate: ollie.rate, price: ollie.price)
 
 AssetEvent.create!(company: hex, event: event, asset: asset)
