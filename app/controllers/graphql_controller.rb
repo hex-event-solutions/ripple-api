@@ -11,8 +11,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      company_id: request.env['keycloak.groups']&.first.split('.')[0]
     }
     result = AssetmanagementSchema.execute(
       query,
