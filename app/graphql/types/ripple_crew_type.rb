@@ -7,8 +7,6 @@ module Types
     field :rate, Float, null: false
     field :price, Float, null: false
 
-    field :crew_roles, [Types::RippleCrewRoleType], null: true
-    field :roles, [Types::RippleRoleType], null: true
     field :shifts, [Types::RippleShiftType], null: true
   end
 end
