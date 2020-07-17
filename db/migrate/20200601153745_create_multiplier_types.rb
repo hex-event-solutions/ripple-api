@@ -5,9 +5,10 @@ class CreateMultiplierTypes < ActiveRecord::Migration[6.0]
     create_table :multiplier_types, id: :uuid, default: 'gen_random_uuid()' do |t|
       t.references :company, type: :uuid, null: false, foreign_key: true
       t.string :name
-      t.decimal :multiplier
+      t.integer :multiplier
+      t.string :multiplier_type
+      t.integer :operand_quantity
       t.string :operand_type
-      t.decimal :operand_quantity
 
       t.timestamps
     end

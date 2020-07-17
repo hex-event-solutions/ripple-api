@@ -6,7 +6,6 @@ class CreateAssetTypes < ActiveRecord::Migration[6.0]
       t.references :company, type: :uuid, null: false, foreign_key: true
       t.decimal :cost
       t.decimal :rate
-      t.references :multiplier_type, type: :uuid, null: false, foreign_key: true
       t.boolean :display_on_website
       t.string :manufacturer
       t.string :model
