@@ -5,7 +5,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# Bundle edge Rails instead:
+# gem 'rails', github: 'rails/rails' # Drop back to 6.1.x release when required. For service: key on activestorage
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
@@ -25,7 +26,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,4 +55,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'graphql', '~> 1.9'
 
 gem 'airbrake', '~> 10.0.5'
-gem 'ripple_token', '~> 0.1.0'
+gem 'aws-sdk-s3', require: false
+gem 'mustache', '~>1.0.2'
+gem 'ripple_token', '~> 0.2.4'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
