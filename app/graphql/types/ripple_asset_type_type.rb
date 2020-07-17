@@ -18,6 +18,7 @@ module Types
     field :asset_type_categories, [Types::RippleAssetTypeCategoryType], null: true
     field :categories, [Types::RippleCategoryType], null: true
     field :accessories, [Types::RippleAccessoryType], null: true
+    field :images, [Types::RippleImageType], null: true
 
     field :multiplier_type, Types::RippleMultiplierTypeType, null: false
   end

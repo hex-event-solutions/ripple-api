@@ -6,6 +6,7 @@ module Types
     field :fullname, String, null: false
 
     field :children, [Types::RippleCategoryType], null: true
+    field :images, [Types::RippleImageType], null: true
 
     field :parent, Types::RippleCategoryType, null: true
   end
