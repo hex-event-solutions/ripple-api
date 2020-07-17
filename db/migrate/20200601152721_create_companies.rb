@@ -14,6 +14,7 @@ class CreateCompanies < ActiveRecord::Migration[6.0]
       t.string :postcode
       t.string :phone_number
       t.string :logo
+      t.string :domain
 
       t.timestamps
     end
