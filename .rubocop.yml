@@ -28,6 +28,11 @@ Style/SlicingWithRange:
 Style/Documentation:
   Enabled: false
 
+Metrics/AbcSize:
+  Exclude:
+    - db/migrate/*
+    - app/controllers/graphql_controller.rb
+
 Metrics/MethodLength:
   Exclude:
     - db/migrate/*
