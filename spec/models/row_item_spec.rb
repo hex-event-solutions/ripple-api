@@ -14,7 +14,8 @@ RSpec.describe RowItem do
     it { should validate_length_of(:description).is_at_most(255) }
   end
 
-  describe 'associations' do
-    it { should have_many(:document_items) }
-  end
+  # describe 'associations' do
+  #   it { should have_many(:documents) }
+  #   it { should have_many(:events) }
+  # end
 end

@@ -8,7 +8,6 @@ RSpec.describe AssetType do
   describe 'fields' do
     it { should validate_presence_of(:cost) }
     it { should validate_presence_of(:rate) }
-    it { should validate_presence_of(:multiplier_type) }
     it { should validate_presence_of(:manufacturer) }
     it { should validate_presence_of(:model) }
     it { should validate_presence_of(:weight) }
@@ -24,12 +23,10 @@ RSpec.describe AssetType do
 
   describe 'associations' do
     it { should have_many(:assets) }
-    it { should have_many(:asset_type_events) }
     it { should have_many(:maintenance_schedules) }
     it { should have_many(:asset_type_specifications) }
     it { should have_many(:asset_type_categories) }
     it { should have_many(:accessories) }
-
-    it { should belong_to(:multiplier_type) }
+    it { should have_many(:multiplier_types) }
   end
 end

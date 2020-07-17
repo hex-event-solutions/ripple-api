@@ -8,11 +8,13 @@ RSpec.describe MultiplierType do
   describe 'fields' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:multiplier) }
+    it { should validate_presence_of(:multiplier_type) }
     it { should validate_presence_of(:operand_type) }
     it { should validate_presence_of(:operand_quantity) }
 
     it { should validate_length_of(:name).is_at_most(16) }
-    it { should validate_length_of(:operand_type).is_at_most(8) }
+    it { should validate_inclusion_of(:multiplier_type).in_array(%w[hour day week month year]) }
+    it { should validate_inclusion_of(:operand_type).in_array(%w[hour day week month year]) }
 
     it { should validate_numericality_of(:multiplier) }
     it { should validate_numericality_of(:operand_quantity) }

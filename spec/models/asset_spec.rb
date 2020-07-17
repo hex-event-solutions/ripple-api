@@ -13,7 +13,6 @@ RSpec.describe Asset do
   end
 
   describe 'associations' do
-    it { should have_many(:asset_events) }
     it { should have_many(:maintenance_events) }
 
     it { should belong_to(:asset_type) }

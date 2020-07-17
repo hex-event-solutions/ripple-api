@@ -6,14 +6,8 @@ FactoryBot.define do
   factory :accessory do
     company
     asset_type { create(:asset_type, company: company) }
-    accessory { create(:asset_type, company: company, multiplier_type: asset_type.multiplier_type) }
+    accessory { create(:asset_type, company: company) }
     quantity { Faker::Number.decimal(l_digits: 1) }
-  end
-
-  factory :asset_event do
-    company
-    asset { create(:asset, company: company) }
-    event { create(:event, company: company) }
   end
 
   factory :asset do
@@ -29,17 +23,8 @@ FactoryBot.define do
     category { create(:category, company: company) }
   end
 
-  factory :asset_type_event do
-    company
-    asset_type { create(:asset_type, company: company) }
-    event { create(:event, company: company) }
-    quantity { Faker::Number.decimal(l_digits: 2) }
-    discount { Faker::Number.number(digits: 2) }
-  end
-
   factory :asset_type do
     company
-    multiplier_type { create(:multiplier_type, company: company) }
     cost { Faker::Number.decimal(l_digits: 2) }
     rate { Faker::Number.decimal(l_digits: 2) }
     display_on_website { Faker::Boolean.boolean }
@@ -47,6 +32,12 @@ FactoryBot.define do
     model { Faker::App.name }
     weight { Faker::Number.decimal(l_digits: 2) }
     description { Faker::Lorem.paragraph }
+  end
+
+  factory :asset_type_multiplier_type do
+    company
+    multiplier_type { create(:multiplier_type, company: company) }
+    asset_type { create(:asset_type, company: company) }
   end
 
   factory :asset_type_specification do
@@ -119,9 +110,8 @@ FactoryBot.define do
 
   factory :document do
     company
-    client { create(:client, company: company) }
-    event { create(:event, client: client, company: company) }
     document_type { create(:document_type, company: company) }
+    subject_id { '123' }
   end
 
   factory :document_item do
@@ -155,14 +145,8 @@ FactoryBot.define do
   factory :document_type do
     company
     name { ['Quote', 'Invoice', 'PAT Report', 'Pick List'].sample }
-  end
-
-  factory :document_type_field do
-    company
-    document_type { create(:document_type, company: company) }
-    name { ['Model', 'Manufacturer', 'Price', 'Cost', 'Test date'].sample }
-    resource { %w[MaintenanceEvent AssetType Event Accessory].sample }
-    property { %w[model manufacturer price cost date_updated].sample }
+    template { '<p>Hello</p>' }
+    subject { 'Event' }
   end
 
   factory :event do
@@ -215,7 +199,8 @@ FactoryBot.define do
     company
     name { %w[Daily Shortweekly Weekly Monthly].sample }
     multiplier { Faker::Number.decimal(l_digits: 2) }
-    operand_type { %w[day week month year].sample }
+    multiplier_type { %w[hour day week month year].sample }
+    operand_type { %w[hour day week month year].sample }
     operand_quantity { Faker::Number.decimal(l_digits: 2) }
   end
 

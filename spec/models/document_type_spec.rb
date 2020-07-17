@@ -7,6 +7,8 @@ RSpec.describe DocumentType do
 
   describe 'fields' do
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:template) }
+    it { should validate_presence_of(:subject) }
 
     it { should validate_length_of(:name).is_at_most(32) }
 
@@ -15,6 +17,6 @@ RSpec.describe DocumentType do
 
   describe 'associations' do
     it { should have_many(:documents) }
-    it { should have_many(:document_type_fields) }
+    it { should belong_to(:company) }
   end
 end

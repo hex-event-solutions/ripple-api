@@ -16,9 +16,6 @@ RSpec.describe Event do
   end
 
   describe 'associations' do
-    it { should have_many(:documents) }
-    it { should have_many(:asset_events) }
-    it { should have_many(:asset_type_events) }
     it { should have_many(:shifts) }
 
     it { should belong_to(:client) }
