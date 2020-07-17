@@ -6,7 +6,7 @@ RippleToken::Client.configure do |c|
   c.public_key_ttl = ENV.fetch('KEYCLOAK_PUBLIC_KEY_TTL', 86_400)
   c.public_paths = {
     get: [],
-    post: [],
+    'POST' => ['/graphql'],
     put: [],
     patch: [],
     delete: []
