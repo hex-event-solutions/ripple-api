@@ -8,9 +8,12 @@ module Types
     field :asset_types, [Types::RippleAssetTypeType], null: false, description: 'Returns all asset types'
     field :asset_cases, [Types::RippleAssetCaseType], null: false, description: 'Returns all asset cases'
     field :assets, [Types::RippleAssetType], null: false, description: 'Returns all assets'
-    field :categories, [Types::RippleCategoryType], null: false, description: 'Returns all categories'
+    field :categories, [Types::RippleCategoryType], null: false, description: 'Returns all categories' do
+      argument :root, Boolean, required: false
+    end
     field :client_types, [Types::RippleClientTypeType], null: false, description: 'Returns all client types'
     field :clients, [Types::RippleClientType], null: false, description: 'Returns all clients'
+    field :companies, [Types::RippleCompanyType], null: false, description: 'Returns all companies'
     field :crew, [Types::RippleCrewType], null: false, description: 'Returns all crew'
     field :document_states, [Types::RippleDocumentStateType], null: false, description: 'Returns all document states'
     field :document_types, [Types::RippleDocumentTypeType], null: false, description: 'Returns all document types'
@@ -25,7 +28,6 @@ module Types
           null: false,
           description: 'Returns all maintenance types'
     field :multiplier_types, [Types::RippleMultiplierTypeType], null: false, description: 'Returns all multiplier types'
-    field :roles, [Types::RippleRoleType], null: false, description: 'Returns all roles'
     field :row_items, [Types::RippleRowItemType], null: false, description: 'Returns all row items'
     field :specifications, [Types::RippleSpecificationType], null: false, description: 'Returns all specificaions'
 
@@ -41,7 +43,9 @@ module Types
       Asset.where(company_id: context[:company_id])
     end
 
-    def categories
+    def categories(root: false)
+      return Category.where(company_id: context[:company_id], parent_id: nil) if root
+
       Category.where(company_id: context[:company_id])
     end
 
@@ -51,6 +55,10 @@ module Types
 
     def clients
       Client.where(company_id: context[:company_id])
+    end
+
+    def companies
+      Company.all
     end
 
     def crew
@@ -83,10 +91,6 @@ module Types
 
     def multiplier_types
       MultiplierType.where(company_id: context[:company_id])
-    end
-
-    def roles
-      Role.where(company_id: context[:company_id])
     end
 
     def row_items
