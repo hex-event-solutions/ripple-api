@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Asset < ApplicationRecord
-  has_many :asset_events
-  has_many :events, through: :asset_events
+  include EventItems
+
   has_many :maintenance_events
 
   belongs_to :company

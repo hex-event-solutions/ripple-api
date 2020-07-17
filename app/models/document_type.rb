@@ -2,10 +2,22 @@
 
 class DocumentType < ApplicationRecord
   has_many :documents
-  has_many :document_type_fields
 
   belongs_to :company
 
-  validates :company, :name, presence: true
+  validates :company, :name, :template, :subject, presence: true
   validates :name, length: { maximum: 32 }, uniqueness: { scope: :company_id }
+
+  def full_template
+    %(
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <style>#{styles}</style>
+        </head>
+        <body>{{#subject}}#{template}{{/subject}}</body>
+      </html>
+    )
+  end
 end

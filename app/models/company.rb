@@ -21,14 +21,16 @@ class Company < ApplicationRecord
   has_many :document_types
   has_many :document_type_fields
   has_many :events
+  has_many :images
   has_many :maintenance_events
   has_many :maintenance_resolutions
   has_many :maintenance_schedules
   has_many :maintenance_types
   has_many :multiplier_types
+  has_many :resource_images
   has_many :row_items
   has_many :shifts
   has_many :specifications
 
-  validates :name, :address1, :city, :county, :postcode, :phone_number, presence: true
+  validates :name, presence: true, uniqueness: true
 end

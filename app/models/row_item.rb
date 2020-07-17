@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class RowItem < ApplicationRecord
-  include Item
+  include DocumentItems
+  include EventItems
 
-  has_many :documents, through: :document_items
+  # has_many :documents, through: :document_items
+  # has_many :events, through: :event_items
 
   belongs_to :company
 

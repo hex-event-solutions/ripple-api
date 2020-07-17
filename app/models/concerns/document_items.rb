@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module Item
+module DocumentItems
   extend ActiveSupport::Concern
 
   included do
-    has_many :document_items, as: :item
+    has_many :documents, as: :item
   end
 end

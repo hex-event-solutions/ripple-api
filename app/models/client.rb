@@ -3,7 +3,6 @@
 class Client < ApplicationRecord
   has_many :contacts
   has_many :events
-  has_many :documents
 
   belongs_to :company
   belongs_to :client_type

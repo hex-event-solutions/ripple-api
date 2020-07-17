@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
+  include Resource
+
   has_many :asset_type_categories
   has_many :asset_types, through: :asset_type_categories
+  has_many :images, through: :resource_images
 
   has_many :children, class_name: 'Category', foreign_key: :parent_id
   belongs_to :parent, class_name: 'Category', optional: true
