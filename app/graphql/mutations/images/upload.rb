@@ -14,23 +14,28 @@ module Mutations
         validate_file_type!(content_type)
 
         asset_type = AssetType.find_by!(company_id: context[:company_id], id: asset_type_id)
-        filename = "#{asset_type.name} #{asset_type.images.count + 1}.#{file_types[content_type]}"
-        filename = filename.gsub(' ', '_')
+        filename = build_filename(asset_type, content_type)
 
-        pp filename
-
-        blob = ActiveStorage::Blob.create_before_direct_upload!(
-          filename: filename,
-          byte_size: byte_size,
-          checksum: checksum,
-          content_type: content_type
-        )
+        blob = create_blob(filename, byte_size, checksum, content_type)
 
         { blob: {
           id: blob.id,
           service_url: blob.service_url_for_direct_upload,
           headers: blob.service_headers_for_direct_upload.map { |k, v| "#{k}: #{v}" }
         } }
+      end
+
+      def create_blob(filename, byte_size, checksum, content_type)
+        ActiveStorage::Blob.create_before_direct_upload!(
+          filename: filename,
+          byte_size: byte_size,
+          checksum: checksum,
+          content_type: content_type
+        )
+      end
+
+      def build_filename(asset_type, content_type)
+        "#{asset_type.name} #{asset_type.images.count + 1}.#{file_types[content_type]}".gsub(' ', '_')
       end
 
       def validate_file_type!(file_type)

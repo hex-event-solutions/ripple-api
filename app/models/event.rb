@@ -53,45 +53,46 @@ class Event < ApplicationRecord
     @items ||= event_items.where.not(item_type: 'Asset').map do |ei|
       item = ei.item.formatted_hash(ei)
       item[:discount] = item_discount(ei.discount)
-      subtotal = item_subtotal(ei, ei.item.duration_price(date_start: date_start, date_end: date_end))
+      subtotal = item_subtotal(ei, date_start, date_end)
       item[:subtotal] = currency(subtotal)
       item[:raw_subtotal] = subtotal
       item
     end
   end
 
-  def bare_items
-    return @bare_items if @bare_items
+  # def bare_items
+  #   return @bare_items if @bare_items
 
-    all_items = (items + items.map { |item| item[:accessories] || [] }).flatten
+  #   all_items = (items + items.map { |item| item[:accessories] || [] }).flatten
 
-    all_items = all_items.map do |item|
-      {
-        name: item[:name],
-        quantity: item[:quantity]
-      }
-    end
+  #   all_items = all_items.map do |item|
+  #     {
+  #       name: item[:name],
+  #       quantity: item[:quantity]
+  #     }
+  #   end
 
-    all_items = all_items.sort_by { |item| item[:name] }.inject([]) do |memo, item|
-      if memo.last.nil?
-        [item]
-      elsif memo.last[:name] == item[:name]
-        memo.last[:quantity] += item[:quantity]
-        memo
-      else
-        memo << item
-      end
-    end
+  #   all_items = all_items.sort_by { |item| item[:name] }.inject([]) do |memo, item|
+  #     if memo.last.nil?
+  #       [item]
+  #     elsif memo.last[:name] == item[:name]
+  #       memo.last[:quantity] += item[:quantity]
+  #       memo
+  #     else
+  #       memo << item
+  #     end
+  #   end
 
-    @bare_items = all_items
-    @bare_items
-  end
+  #   @bare_items = all_items
+  #   @bare_items
+  # end
 
   def item_discount(discount)
     percentage(display_discount(calculate_discount(discount)))
   end
 
-  def item_subtotal(event_item, price)
+  def item_subtotal(event_item, date_start, date_end)
+    price = event_item.item.duration_price(date_start: date_start, date_end: date_end)
     calculate_discount(event_item.discount) * price * event_item.quantity
   end
 

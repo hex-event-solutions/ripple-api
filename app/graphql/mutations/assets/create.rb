@@ -19,16 +19,16 @@ module Mutations
         end
 
         params[:company_id] = context[:company_id]
-        quantity = params[:quantity]
-        params.delete :quantity
 
-        return { assets: [Asset.create!(params)] } if params[:barcode]
+        return { assets: [Asset.create!(params.except(:quantity))] } if params[:barcode]
 
-        full_params = [params] * quantity
-
-        { assets: Asset.create!(full_params) }
+        { assets: Asset.create!(multi_params(params)) }
       rescue ActiveRecord::ActiveRecordError => e
         raise GraphQL::ExecutionError, e.message
+      end
+
+      def multi_params(params)
+        [params.except(:quantity)] * params[:quantity]
       end
     end
   end

@@ -31,6 +31,6 @@ class AssetCase < ApplicationRecord
     pattern = Setting.for(company_id: company_id, name: 'Asset case barcode pattern')
     pre, placeholder, post = pattern.match(/^(.*)\((0*)\)(.*)$/).captures
     formatter = "%0#{placeholder&.length || 0}d"
-    "#{pre}#{formatter}#{post}" % number
+    format("#{pre}#{formatter}#{post}", number)
   end
 end

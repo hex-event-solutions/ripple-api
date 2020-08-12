@@ -118,6 +118,6 @@ class DocumentType < ApplicationRecord
   def reference_for(number)
     pre, placeholder, post = increment_pattern.match(/^(.*)\((0*)\)(.*)$/).captures
     formatter = "%0#{placeholder&.length || 0}d"
-    "#{pre}#{formatter}#{post}" % number
+    format("#{pre}#{formatter}#{post}", number)
   end
 end

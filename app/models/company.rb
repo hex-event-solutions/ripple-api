@@ -41,75 +41,20 @@ class Company < ApplicationRecord
   )
 
   def offboard
-    AssetCase.where(company_id: id).each(&:destroy)
-    Document.where(company_id: id).each(&:destroy)
-    Contact.where(company_id: id).each(&:destroy)
-    Category.where(company_id: id).each(&:destroy)
-    AssetType.where(company_id: id).each(&:destroy)
+    offboard_dependencies
+    offboard_links
+    offboard_core
+    offboard_types
 
-    Event.where(company_id: id).each(&:destroy)
-    Client.where(company_id: id).each(&:destroy)
-    Image.where(company_id: id).each(&:destroy)
-    MaintenanceResolution.where(company_id: id).each(&:destroy)
-    MaintenanceSchedule.where(company_id: id).each(&:destroy)
-    RowItem.where(company_id: id).each(&:destroy)
-
-    Specification.where(company_id: id).each(&:destroy)
-    ClientType.where(company_id: id).each(&:destroy)
-    DocumentState.where(company_id: id).each(&:destroy)
-    DocumentType.where(company_id: id).each(&:destroy)
-    MaintenanceType.where(company_id: id).each(&:destroy)
-    MultiplierType.where(company_id: id).each(&:destroy)
     destroy
   end
 
   def create_default_data
-    ClientType.create!(company: self, name: 'Company')
-    ClientType.create!(company: self, name: 'Individual')
-    ClientType.create!(company: self, name: 'Charity')
-
-    MultiplierType.create!(
-      company: self,
-      name: 'Hourly',
-      multiplier: 1,
-      multiplier_type: 'hour',
-      operand_quantity: 1,
-      operand_type: 'hour'
-    )
-    MultiplierType.create!(
-      company: self,
-      name: 'Daily',
-      multiplier: 1,
-      multiplier_type: 'day',
-      operand_quantity: 1,
-      operand_type: 'day'
-    )
-    MultiplierType.create!(
-      company: self,
-      name: 'Shortweekly',
-      multiplier: 3,
-      multiplier_type: 'day',
-      operand_quantity: 7,
-      operand_type: 'day'
-    )
-
-    MaintenanceType.create!(company: self, name: 'Preventative')
-    MaintenanceType.create!(company: self, name: 'Investigative')
-    MaintenanceType.create!(company: self, name: 'Repair')
-    MaintenanceType.create!(company: self, name: 'Routine')
-    MaintenanceType.create!(company: self, name: 'PAT')
-
-    MaintenanceResolution.create!(company: self, name: 'Asset disposed of')
-    MaintenanceResolution.create!(company: self, name: 'Asset under inspection')
-    MaintenanceResolution.create!(company: self, name: 'Maintenance completed')
-    MaintenanceResolution.create!(company: self, name: 'Asset will not be repaired')
-
-    DocumentState.create!(company: self, name: 'Draft')
-    DocumentState.create!(company: self, name: 'Sent')
-    DocumentState.create!(company: self, name: 'Overdue')
-    DocumentState.create!(company: self, name: 'Expired')
-    DocumentState.create!(company: self, name: 'Invoiced')
-    DocumentState.create!(company: self, name: 'Paid')
+    create_client_types
+    create_multiplier_types
+    create_maintenance_types
+    create_maintenance_resolutions
+    create_document_states
 
     create_template_data
   end
@@ -164,5 +109,93 @@ class Company < ApplicationRecord
       start: tmpl_event.date_out,
       finish: tmpl_event.date_return
     )
+  end
+
+  private
+
+  def offboard_dependencies
+    AssetCase.where(company_id: id).each(&:destroy)
+    Document.where(company_id: id).each(&:destroy)
+    Contact.where(company_id: id).each(&:destroy)
+    Category.where(company_id: id).each(&:destroy)
+    AssetType.where(company_id: id).each(&:destroy)
+  end
+
+  def offboard_links
+    MaintenanceResolution.where(company_id: id).each(&:destroy)
+    MaintenanceSchedule.where(company_id: id).each(&:destroy)
+  end
+
+  def offboard_core
+    Event.where(company_id: id).each(&:destroy)
+    Client.where(company_id: id).each(&:destroy)
+    Image.where(company_id: id).each(&:destroy)
+    RowItem.where(company_id: id).each(&:destroy)
+    Specification.where(company_id: id).each(&:destroy)
+  end
+
+  def offboard_types
+    ClientType.where(company_id: id).each(&:destroy)
+    DocumentState.where(company_id: id).each(&:destroy)
+    DocumentType.where(company_id: id).each(&:destroy)
+    MaintenanceType.where(company_id: id).each(&:destroy)
+    MultiplierType.where(company_id: id).each(&:destroy)
+  end
+
+  def create_client_types
+    ClientType.create!(company: self, name: 'Company')
+    ClientType.create!(company: self, name: 'Individual')
+    ClientType.create!(company: self, name: 'Charity')
+  end
+
+  def create_multiplier_types
+    MultiplierType.create!(
+      company: self,
+      name: 'Hourly',
+      multiplier: 1,
+      multiplier_type: 'hour',
+      operand_quantity: 1,
+      operand_type: 'hour'
+    )
+    MultiplierType.create!(
+      company: self,
+      name: 'Daily',
+      multiplier: 1,
+      multiplier_type: 'day',
+      operand_quantity: 1,
+      operand_type: 'day'
+    )
+    MultiplierType.create!(
+      company: self,
+      name: 'Shortweekly',
+      multiplier: 3,
+      multiplier_type: 'day',
+      operand_quantity: 7,
+      operand_type: 'day'
+    )
+  end
+
+  def create_maintenance_types
+    MaintenanceType.create!(company: self, name: 'Preventative')
+    MaintenanceType.create!(company: self, name: 'Investigative')
+    MaintenanceType.create!(company: self, name: 'Repair')
+    MaintenanceType.create!(company: self, name: 'Routine')
+    MaintenanceType.create!(company: self, name: 'PAT')
+  end
+
+  def create_maintenance_resolutions
+    MaintenanceResolution.create!(company: self, name: 'Asset disposed of')
+    MaintenanceResolution.create!(company: self, name: 'Asset under inspection')
+    MaintenanceResolution.create!(company: self, name: 'Maintenance completed')
+    MaintenanceResolution.create!(company: self, name: 'Asset will not be repaired')
+  end
+
+  def create_document_states
+    DocumentState.create!(company: self, name: 'Draft')
+    DocumentState.create!(company: self, name: 'Sent')
+    DocumentState.create!(company: self, name: 'Overdue')
+    DocumentState.create!(company: self, name: 'Expired')
+    DocumentState.create!(company: self, name: 'Invoiced')
+    DocumentState.create!(company: self, name: 'Paid')
   end
 end

@@ -13,23 +13,7 @@ class Document < ApplicationRecord
   default_scope { includes(:document_type, :files_attachments) }
 
   def generate
-    header = Mustache.render(document_type.header_template, subject: subject)
-    content = Mustache.render(document_type.full_template, document: self, subject: subject)
-
-    pp document_type.full_template
-
-    footer = Mustache.render(document_type.footer_template, subject: subject)
-
-    pdf = WickedPdf.new.pdf_from_string(
-      content.html_safe,
-      margin: { top: 29, left: 0, right: 0, bottom: 25 },
-      header: {
-        content: header.html_safe
-      },
-      footer: {
-        content: footer.html_safe
-      }
-    )
+    pdf = create_pdf_string
     file = Tempfile.new
     file.binmode
     file.write(pdf)
@@ -38,6 +22,23 @@ class Document < ApplicationRecord
     file.close
     file.unlink
     files.last
+  end
+
+  def create_pdf_string
+    header = Mustache.render(document_type.header_template, subject: subject)
+    content = Mustache.render(document_type.full_template, document: self, subject: subject)
+    footer = Mustache.render(document_type.footer_template, subject: subject)
+
+    interpolate_pdf(header, content, footer)
+  end
+
+  def interpolate_pdf(header, content, footer)
+    WickedPdf.new.pdf_from_string(
+      content.html_safe,
+      margin: { top: 29, left: 0, right: 0, bottom: 25 },
+      header: { content: header.html_safe },
+      footer: { content: footer.html_safe }
+    )
   end
 
   def display_date_issued

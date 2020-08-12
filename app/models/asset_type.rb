@@ -40,10 +40,6 @@ class AssetType < ApplicationRecord
     categories: ->(v) { v.to_a },
     description: ->(v) { v },
     accessories: ->(v) { v.to_a }
-    #   unit_price: ->(v) { v },
-    #   quantity: ->(v) { v },
-    #   discount: ->(v) { v },
-    #   subtotal: ->(v) { v }
   )
 
   def name
@@ -102,7 +98,6 @@ class AssetType < ApplicationRecord
   end
 
   def cost_with_accessories
-    puts name
     cost + accessory_cost
   end
 
