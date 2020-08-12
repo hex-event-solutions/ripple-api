@@ -4,7 +4,7 @@ require 'mustache'
 
 class MustacheController < ApplicationController
   def document
-    @document ||= Document.first
+    @document ||= Document.find_by(document_type: DocumentType.find_by(name: 'Pick List'))
   end
 
   def test
