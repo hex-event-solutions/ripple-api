@@ -18,7 +18,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    container: ruby:2.7.1-alpine
+    container: ruby:2.7.1
 
     services:
       db:
@@ -35,7 +35,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install OS dependencies
-      run: apk add --update build-base tzdata postgresql-dev
+      run: apt update && apt install -y nodejs postgresql-client
     - name: Restore cache
       uses: actions/cache@v2
       with:
