@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Muli&display=swap');
+
+p, div {
+  font-family: "Muli", "Helvetica", "Arial", sans-serif;
+}
+
+h1, h3, h4, h4, h5, h6, .nav-link {
+  font-family: "Raleway", "Helvetica", "Arial", sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+.no-breaks {
+  white-space: pre-wrap;
+}
+
+.logo {
+  width: 200px;
+}
+
+.accessory-indent {
+  color: #3D90BF;
+  padding-left: 15px;
+}
+
+.top-triangle {
+  width: 0;
+  height: 0;
+  border-top: 120px solid #3D90BF;
+  border-right: 500px solid transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.bottom-triangle {
+  width: 0;
+  height: 0;
+  border-bottom: 120px solid #3D90BF;
+  border-left: 500px solid transparent;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

@@ -1,0 +1,19 @@
+content:
+- padding:
+    bottom: 3
+  content:
+  - heading: 3
+    text: Asset Maintenance History
+- padding:
+    top: 5
+    bottom: 3
+  table:
+    headings:
+    - Barcode
+    - Last PAT test
+    content:
+    - context: assets
+      content:
+      - cells:
+        - text: "Barcode: <barcode>"
+        - text: "ID: <id>"

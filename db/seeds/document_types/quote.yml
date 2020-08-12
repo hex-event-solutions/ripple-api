@@ -1,0 +1,106 @@
+styles:
+  p:
+    margin: 0
+  .no-breaks:
+    white-space: pre-wrap
+  .accessory-indent:
+    color: '#3D90BF'
+    padding-left: 15px
+content:
+- padding:
+    bottom: 3
+  content:
+  - context: client
+    content:
+    - text: ^^<organisation_name>^^
+    - text: <address>
+      style: no-breaks
+  - context: company
+    style: text-right
+    content:
+    - text: ^^<name>^^
+    - text: <address>
+      style: no-breaks
+- padding:
+    top: 3
+  content:
+  - context: document
+    content:
+    - heading: 3
+      text: Quote <reference>
+- padding:
+    bottom: 3
+  content:
+  - context: document
+    content:
+    - text: "^^Date issued: ^^<date_issued>"
+    - text: "^^Date due: ^^<date_due>"
+  - content:
+    - text: "^^Date out: ^^<date_out>"
+    - text: "^^Date return: ^^<date_return>"
+- padding:
+    top: 5
+    bottom: 3
+  table:
+    headings:
+    - Details
+    - Unit price
+    - Quantity
+    - Discount
+    - Total
+    content:
+    - context: items
+      content:
+      - cells:
+        - context: name
+          present:
+          - text: <name>
+          - text: <description>
+            style: text-muted
+          missing:
+          - text: <description>
+        - text: <unit_price>
+        - text: <quantity>
+        - text: <discount>
+        - text: <subtotal>
+      - context: accessories
+        content:
+        - cells:
+          - text: <name>
+            style: text-muted accessory-indent
+          - text: <unit_price>
+          - text: <quantity>
+          - text: 100.0%
+          - text: £0.00
+    - cells:
+      - blank: 5
+    - cells:
+      - width: 4
+        style: text-right
+        text: Grand Total
+      - text: <grand_total>
+  content:
+  - text: "^^Total replacement value:^^ <asset_types_total_value>"
+- padding:
+    top: 3
+    bottom: 3
+  content:
+  - blank
+  - context: company
+    content:
+    - heading: 4
+      text: Other information
+    - text: "^^Company number:^^ <company_number>"
+- padding:
+    top: 3
+    bottom: 3
+  content:
+    - content:
+      - text: If you have any questions or queries regarding your event, please do not hesitate to get in contact with us on 07817 026962 or hire@hexes.co.uk.
+        style: text-muted
+      - text: Continuing with your event booking signifies your agreement to our terms and conditions, available at https://hexes.co.uk/hire/terms-and-conditions
+        style: text-muted
+      - text: Please ensure you have adequate insurance to cover the total replacement value shown on this quote.
+        style: text-muted
+      - text: Thank you for choosing Hex Event Solutions Limited
+        style: text-muted

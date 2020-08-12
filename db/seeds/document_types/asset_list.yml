@@ -1,0 +1,20 @@
+content:
+- content:
+  - heading: 2
+    text: Asset list for <name>
+- padding:
+    top: 5
+    bottom: 3
+  table:
+    headings:
+    - Barcode
+    - Case barcode
+    - Last PAT test
+    content:
+    - context: assets
+      content:
+      - cells:
+        - text: <barcode>
+        - context: case
+          text: <barcode>
+        - text: N/A
