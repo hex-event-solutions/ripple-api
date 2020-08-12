@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class MultiplierType < ApplicationRecord
-  has_many :asset_type_multiplier_types
+  has_many :asset_type_multiplier_types, dependent: :destroy
   has_many :asset_types, through: :asset_type_multiplier_types
 
   belongs_to :company
 
   validates :company, :name, :multiplier, :multiplier_type, :operand_type, :operand_quantity, presence: true
-  validates :name, length: { maximum: 16 }
+  validates :name, length: { maximum: 32 }
   validates :multiplier, :operand_quantity, numericality: true
   validates :operand_type, :multiplier_type, inclusion: %w[hour day week month year]
   validate :unique_unit_duration
@@ -53,5 +53,17 @@ class MultiplierType < ApplicationRecord
 
     operand_method = operand_type.to_sym
     operand_quantity&.public_send(operand_method)
+  end
+
+  def summary
+    "#{multiplier} #{multiplier_type_string} (up to #{operand_quantity} #{operand_type_string})"
+  end
+
+  def operand_type_string
+    operand_quantity > 1 ? operand_type.pluralize : operand_type
+  end
+
+  def multiplier_type_string
+    multiplier > 1 ? multiplier_type.pluralize : multiplier_type
   end
 end

@@ -5,5 +5,6 @@ module Resource
 
   included do
     has_many :resource_images, as: :resource
+    has_many :images, through: :resource_images
   end
 end

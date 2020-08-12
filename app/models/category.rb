@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
+  include Documents
   include Resource
 
-  has_many :asset_type_categories
-  has_many :asset_types, through: :asset_type_categories
-  has_many :images, through: :resource_images
+  template_values name: 'Template root category'
 
-  has_many :children, class_name: 'Category', foreign_key: :parent_id
+  has_many :asset_type_categories, dependent: :destroy
+  has_many :asset_types, through: :asset_type_categories
+
+  has_many :children, class_name: 'Category', foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: 'Category', optional: true
 
   belongs_to :company

@@ -6,4 +6,6 @@ class AssetTypeMultiplierType < ApplicationRecord
   belongs_to :multiplier_type
 
   validates :company, :asset_type, :multiplier_type, presence: true
+
+  default_scope { includes(:multiplier_type) }
 end

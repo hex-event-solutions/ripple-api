@@ -6,4 +6,6 @@ class AssetTypeCategory < ApplicationRecord
   belongs_to :category
 
   validates :company, :asset_type, :category, presence: true
+
+  default_scope { includes(:category) }
 end

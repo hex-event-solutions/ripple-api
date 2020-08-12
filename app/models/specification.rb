@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Specification < ApplicationRecord
-  has_many :asset_type_specifications
+  template_values name: 'Template specification'
+
+  has_many :asset_type_specifications, dependent: :destroy
   has_many :asset_types, through: :asset_type_specifications
 
   belongs_to :company

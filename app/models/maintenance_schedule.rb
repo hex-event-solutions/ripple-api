@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 class MaintenanceSchedule < ApplicationRecord
-  has_many :maintenance_events
+  include Documents
+
+  template_values(
+    details: 'Template maintenance schedule details',
+    repeat_multiplier: 3,
+    repeat_period: 'month'
+  )
+
+  has_many :maintenance_events, dependent: :destroy
 
   belongs_to :company
   belongs_to :asset_type

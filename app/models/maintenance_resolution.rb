@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MaintenanceResolution < ApplicationRecord
-  has_many :maintenance_events
+  has_many :maintenance_events, dependent: :destroy
 
   belongs_to :company
 

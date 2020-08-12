@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class RowItem < ApplicationRecord
-  include DocumentItems
   include EventItems
 
   # has_many :documents, through: :document_items
@@ -12,4 +11,12 @@ class RowItem < ApplicationRecord
   validates :company, :price, :description, presence: true
   validates :price, numericality: true
   validates :description, length: { maximum: 255 }
+
+  def formatted_hash(event_item)
+    item = attributes.symbolize_keys
+    item[:mustache_description] = description
+    item[:quantity] = event_item.quantity
+    item[:unit_price] = currency(price)
+    item
+  end
 end

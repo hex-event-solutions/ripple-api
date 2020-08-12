@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DocumentState < ApplicationRecord
-  has_many :document_state_events
+  has_many :document_state_events, dependent: :destroy
 
   belongs_to :company
 

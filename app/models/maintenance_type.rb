@@ -2,6 +2,7 @@
 
 class MaintenanceType < ApplicationRecord
   has_many :maintenance_schedules
+  has_many :maintenence_events
 
   belongs_to :company
 

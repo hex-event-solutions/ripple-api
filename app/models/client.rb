@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 class Client < ApplicationRecord
+  include Documents
+
+  template_values(
+    organisation_name: 'Template client',
+    address1: 'A room',
+    address2: 'A block',
+    address3: 'A street',
+    city: 'A city',
+    county: 'A county',
+    postcode: 'A postcode',
+    discount: 0
+  )
+
   has_many :contacts
   has_many :events
 
@@ -12,4 +25,9 @@ class Client < ApplicationRecord
   validates :postcode, length: { maximum: 10 }
   validates :discount, presence: true, numericality: { only_integer: true }
   validates :company, :client_type, presence: true
+
+  mustache(
+    organisation_name: ->(v) { v },
+    address: ->(v) { v }
+  )
 end
