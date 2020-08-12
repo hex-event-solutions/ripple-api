@@ -8,15 +8,15 @@ class DocumentType < ApplicationRecord
   belongs_to :company
 
   validates :company, :name, :content, :subject, presence: true
-  validates :name, length: { maximum: 32 }, uniqueness: { scope: [:company_id, :subject] }
+  validates :name, length: { maximum: 32 }, uniqueness: { scope: %i[company_id subject] }
 
   before_destroy :destroy_templates
 
   def full_styles
-    %{
+    %(
       #{Setting.for(company_id: company.id, name: 'Document styles')}
       #{styles}
-    }
+    )
   end
 
   def full_template

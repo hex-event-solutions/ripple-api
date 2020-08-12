@@ -9,7 +9,7 @@ class AssetCase < ApplicationRecord
 
   belongs_to :company
 
-  validates :company, presence: true
+  validates :company, :barcode, presence: true
   validates :barcode, length: { maximum: 16 }
 
   before_create :create_barcode

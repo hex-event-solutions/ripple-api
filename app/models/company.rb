@@ -60,7 +60,7 @@ class Company < ApplicationRecord
     DocumentType.where(company_id: id).each(&:destroy)
     MaintenanceType.where(company_id: id).each(&:destroy)
     MultiplierType.where(company_id: id).each(&:destroy)
-    self.destroy
+    destroy
   end
 
   def create_default_data
@@ -68,9 +68,30 @@ class Company < ApplicationRecord
     ClientType.create!(company: self, name: 'Individual')
     ClientType.create!(company: self, name: 'Charity')
 
-    MultiplierType.create!(company: self, name: 'Hourly', multiplier: 1, multiplier_type: 'hour', operand_quantity: 1, operand_type: 'hour')
-    MultiplierType.create!(company: self, name: 'Daily', multiplier: 1, multiplier_type: 'day', operand_quantity: 1, operand_type: 'day')
-    MultiplierType.create!(company: self, name: 'Shortweekly', multiplier: 3, multiplier_type: 'day', operand_quantity: 7, operand_type: 'day')
+    MultiplierType.create!(
+      company: self,
+      name: 'Hourly',
+      multiplier: 1,
+      multiplier_type: 'hour',
+      operand_quantity: 1,
+      operand_type: 'hour'
+    )
+    MultiplierType.create!(
+      company: self,
+      name: 'Daily',
+      multiplier: 1,
+      multiplier_type: 'day',
+      operand_quantity: 1,
+      operand_type: 'day'
+    )
+    MultiplierType.create!(
+      company: self,
+      name: 'Shortweekly',
+      multiplier: 3,
+      multiplier_type: 'day',
+      operand_quantity: 7,
+      operand_type: 'day'
+    )
 
     MaintenanceType.create!(company: self, name: 'Preventative')
     MaintenanceType.create!(company: self, name: 'Investigative')
@@ -99,9 +120,17 @@ class Company < ApplicationRecord
     tmpl_asset_type2 = AssetType.create_template!(company: self, model: 'Accessory asset type')
     Accessory.create_template!(company: self, asset_type: tmpl_asset_type, accessory: tmpl_asset_type2)
     tmpl_specification = Specification.create_template!(company: self)
-    AssetTypeSpecification.create_template!(company: self, asset_type: tmpl_asset_type, specification: tmpl_specification)
+    AssetTypeSpecification.create_template!(
+      company: self,
+      asset_type: tmpl_asset_type,
+      specification: tmpl_specification
+    )
     tmpl_multiplier_type = MultiplierType.where(company_id: id).first
-    AssetTypeMultiplierType.create_template!(company: self, asset_type: tmpl_asset_type, multiplier_type: tmpl_multiplier_type)
+    AssetTypeMultiplierType.create_template!(
+      company: self,
+      asset_type: tmpl_asset_type,
+      multiplier_type: tmpl_multiplier_type
+    )
     tmpl_asset = Asset.create_template!(company: self, asset_type: tmpl_asset_type, asset_case: tmpl_asset_case)
     tmpl_root_category = Category.create_template!(company: self)
     tmpl_category = Category.create_template!(company: self, name: 'Template category', parent: tmpl_root_category)
@@ -121,7 +150,7 @@ class Company < ApplicationRecord
     tmpl_maintenance_schedule = MaintenanceSchedule.create_template!(
       company: self,
       asset_type: tmpl_asset_type,
-      maintenance_type: tmpl_maintenance_type,
+      maintenance_type: tmpl_maintenance_type
     )
     MaintenanceEvent.create_template!(
       company: self,

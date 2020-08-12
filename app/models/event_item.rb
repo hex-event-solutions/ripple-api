@@ -2,7 +2,7 @@
 
 class EventItem < ApplicationRecord
   template_values quantity: 1, discount: 0
-  
+
   belongs_to :company
   belongs_to :event
   belongs_to :item, polymorphic: true

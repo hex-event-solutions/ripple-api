@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Shift do
-  subject { create :shift }
+  subject { build :shift }
 
   describe 'fields' do
-    it { should validate_presence_of(:crew) }
+    it { should validate_presence_of(:crew_id) }
     it { should validate_presence_of(:event) }
     it { should validate_presence_of(:start) }
     it { should validate_presence_of(:finish) }
@@ -18,7 +18,6 @@ RSpec.describe Shift do
   end
 
   describe 'associations' do
-    it { should belong_to(:crew) }
     it { should belong_to(:event) }
   end
 end

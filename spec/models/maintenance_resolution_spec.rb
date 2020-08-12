@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe MaintenanceResolution do
-  subject { create :maintenance_resolution }
+  subject { build :maintenance_resolution }
 
   describe 'fields' do
     it { should validate_presence_of(:name) }

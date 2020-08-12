@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe AssetType do
-  subject { create :asset_type }
+  subject { build :asset_type }
 
   describe 'fields' do
     it { should validate_presence_of(:cost) }
@@ -11,7 +11,6 @@ RSpec.describe AssetType do
     it { should validate_presence_of(:manufacturer) }
     it { should validate_presence_of(:model) }
     it { should validate_presence_of(:weight) }
-    it { should validate_presence_of(:description) }
 
     it { should validate_numericality_of(:cost) }
     it { should validate_numericality_of(:rate) }

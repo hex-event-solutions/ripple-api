@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe MultiplierType do
-  subject { create :multiplier_type }
+  subject { build :multiplier_type }
 
   describe 'fields' do
     it { should validate_presence_of(:name) }
@@ -12,7 +12,7 @@ RSpec.describe MultiplierType do
     it { should validate_presence_of(:operand_type) }
     it { should validate_presence_of(:operand_quantity) }
 
-    it { should validate_length_of(:name).is_at_most(16) }
+    it { should validate_length_of(:name).is_at_most(32) }
     it { should validate_inclusion_of(:multiplier_type).in_array(%w[hour day week month year]) }
     it { should validate_inclusion_of(:operand_type).in_array(%w[hour day week month year]) }
 
@@ -21,6 +21,6 @@ RSpec.describe MultiplierType do
   end
 
   describe 'associations' do
-    it { should have_many(:asset_types) }
+    it { should have_many(:asset_type_multiplier_types) }
   end
 end

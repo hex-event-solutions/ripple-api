@@ -11,7 +11,7 @@ class Image < ApplicationRecord
   has_one_attached :file
 
   def url
-    return file.service_url
+    file.service_url
   end
 
   def small

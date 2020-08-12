@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe ClientType do
-  subject { create :client_type }
+  subject { build :client_type }
 
   describe 'fields' do
     it { should validate_presence_of(:name) }

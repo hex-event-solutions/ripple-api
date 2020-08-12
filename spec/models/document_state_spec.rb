@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe DocumentState do
-  subject { create :document_state }
+  subject { build :document_state }
 
   describe 'fields' do
     it { should validate_presence_of(:name) }

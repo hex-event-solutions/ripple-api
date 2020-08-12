@@ -40,10 +40,10 @@ class AssetType < ApplicationRecord
     categories: ->(v) { v.to_a },
     description: ->(v) { v },
     accessories: ->(v) { v.to_a }
-  #   unit_price: ->(v) { v },
-  #   quantity: ->(v) { v },
-  #   discount: ->(v) { v },
-  #   subtotal: ->(v) { v }
+    #   unit_price: ->(v) { v },
+    #   quantity: ->(v) { v },
+    #   discount: ->(v) { v },
+    #   subtotal: ->(v) { v }
   )
 
   def name

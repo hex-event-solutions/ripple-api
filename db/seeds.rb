@@ -37,7 +37,7 @@ CompanySetting.create!(
 CompanySetting.create!(
   company: hex,
   setting: tmpl_header,
-  value: %{
+  value: %(
     <div class='top-triangle'></div>
     <div class='container-fluid p-3'>
       <div class='row pb-3'>
@@ -48,12 +48,12 @@ CompanySetting.create!(
         </div>
       </div>
     </div>
-  }
+  )
 )
 CompanySetting.create!(
   company: hex,
   setting: tmpl_footer,
-  value: %{
+  value: %(
     <div class='bottom-triangle'></div>
     <div class='container-fluid pt-5'>
       <div class='row pt-3 pl-3'>
@@ -62,7 +62,7 @@ CompanySetting.create!(
         </div>
       </div>
     </div>
-  }
+  )
 )
 CompanySetting.create!(
   company: hex,
@@ -99,7 +99,7 @@ pat_report = DocumentType.create!(
   company: hex,
   name: 'PAT Report',
   subject: 'Event',
-  styles: %{
+  styles: %(
     p {
       margin: 0;
     }
@@ -107,7 +107,7 @@ pat_report = DocumentType.create!(
     .no-breaks {
       white-space: pre-wrap;
     }
-  },
+  ),
   content: %(
     <div class='container-fluid p-5'>
       <div class='row pb-3'>
@@ -151,7 +151,7 @@ pick_list = DocumentType.create!(
   company: hex,
   name: 'Pick List',
   subject: 'Event',
-  content: %{
+  content: %(
     <div class='container-fluid p-5'>
       <div class='row pb-3'>
         <div class='col'>
@@ -188,7 +188,7 @@ pick_list = DocumentType.create!(
         </div>
       </div>
     </div>
-  }
+  )
 )
 maintenance_history = DocumentType.create!(
   company: hex,
@@ -596,7 +596,7 @@ h1, h2, h3, h4, h5, h6, .nav-link {
   background-color: rgba(20, 23, 25, 0.8) !important;
 }
   },
-  template: %{
+  template: %(
 id: bf95a575-ebcc-4a6d-9955-4dc6892f9884
 header:
   brand:
@@ -834,7 +834,7 @@ pages:
     - separator: true
     - heading: Equipment
     - paragraph: Should our equipment be damaged, lost or stolen during an event and outside of the fault of the crew, any repair, replacement costs and/or hire costs in the period before repair shall be paid by the event organiser. In the case of theft, the cost of replacement will be passed on to the event organiser and the event organiser shall be reported to the appropriate authorities.
-  }
+  )
 )
 
 WebsiteComponent.create!(
@@ -842,7 +842,7 @@ WebsiteComponent.create!(
   website: website,
   name: 'block',
   component_type: 'component',
-  template: %{
+  template: %(
     <div class='pt-4 text-left'>
       {{#width}}<div class='col-sm-{{width}}'>{{/width}}
       {{^width}}<div class='col-sm-12'>{{/width}}
@@ -862,14 +862,14 @@ WebsiteComponent.create!(
         {{/content}}
       </div>
     </div>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'cards',
   component_type: 'component',
-  template: %{
+  template: %(
     <section class='row pt-10'>
       <div class='col-md-8 offset-md-2'>
         <div class='container'>
@@ -885,14 +885,14 @@ WebsiteComponent.create!(
         </div>
       </div>
     </section>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'contact',
   component_type: 'component',
-  template: %{
+  template: %(
     <section class='row pt-10' id={{anchor}}>
       <div class='big-image contact-image'>
         <div class='container-fluid'>
@@ -907,14 +907,14 @@ WebsiteComponent.create!(
         </div>
       </div>
     </section>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'footer',
   component_type: 'component',
-  template: %{
+  template: %(
     <nav class='navbar navbar-expand-sm navbar-light'>
       <ul class='navbar-nav'>
         {{#content}}
@@ -924,14 +924,14 @@ WebsiteComponent.create!(
         {{/content}}
       </ul>
     </nav>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'grid',
   component_type: 'component',
-  template: %{
+  template: %(
     <section class='row pt-10'>
       <div class='col-sm-12'><h1>{{heading}}</h1></div>
       <div class='col-sm-12 pb-3'><h5>{{subheading}}</h5></div>
@@ -952,14 +952,14 @@ WebsiteComponent.create!(
         </div>
       </div>
     </section>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'header',
   component_type: 'component',
-  template: %{
+  template: %(
     <nav class='navbar navbar-expand-lg border-bottom fixed-top navbar-dark text-light bg-dark'>
       <a class='navbar-brand' href='{{brand.link}}'>
         <img class='img-fluid nav-image pl-3' src='{{brand.image}}' alt='{{brand.alt}}' />
@@ -997,34 +997,34 @@ WebsiteComponent.create!(
         </ul>
       </div>
     </nav>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'heading',
   component_type: 'component',
-  template: %{
+  template: %(
     <h1>{{text}}</h1>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'image',
   component_type: 'component',
-  template: %{
+  template: %(
     <section class='row pt-10 {{height}}-height'>
       <div class='big-image {{image}}'></div>
     </section>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'jumbotron',
   component_type: 'component',
-  template: %{
+  template: %(
     <section class='row full-height'>
       <div class='big-image home-image'>
         <div class='padding-center'>
@@ -1036,14 +1036,14 @@ WebsiteComponent.create!(
         </div>
       </div>
     </section>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'page-header',
   component_type: 'component',
-  template: %{
+  template: %(
     <section class='row header-height text-center'>
       <div class='big-image header-image'>
         <div class='padding-center-header'>
@@ -1052,14 +1052,14 @@ WebsiteComponent.create!(
         </div>
       </div>
     </section>
-  }
+  )
 )
 WebsiteComponent.create!(
   company: hex,
   website: website,
   name: 'portfolio',
   component_type: 'component',
-  template: %{
+  template: %(
     <section class='row pt-10' id='{{anchor}}'>
       <div class='col-sm-12'><h1>{{heading}}</h1></div>
       <div class='col-sm-12'><h5>{{subheading}}</h5></div>
@@ -1078,5 +1078,5 @@ WebsiteComponent.create!(
         </div>
       {{/content}}
     </section>
-  }
+  )
 )

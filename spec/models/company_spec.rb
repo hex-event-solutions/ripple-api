@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Company do
-  subject { create :company }
+  subject { build :company }
 
   describe 'fields' do
     it { should validate_presence_of(:name) }
@@ -20,9 +20,7 @@ RSpec.describe Company do
     it { should have_many(:clients) }
     it { should have_many(:client_types) }
     it { should have_many(:contacts) }
-    it { should have_many(:crews) }
     it { should have_many(:documents) }
-    it { should have_many(:document_items) }
     it { should have_many(:document_states) }
     it { should have_many(:document_state_events) }
     it { should have_many(:document_types) }

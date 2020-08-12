@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe AssetCase do
-  subject { create :asset_case }
+  subject { build :asset_case }
 
   describe 'fields' do
     it { should validate_presence_of(:barcode) }

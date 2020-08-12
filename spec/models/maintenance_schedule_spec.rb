@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe MaintenanceSchedule do
-  subject { create :maintenance_schedule }
+  subject { build :maintenance_schedule }
 
   describe 'fields' do
     it { should validate_presence_of(:asset_type) }

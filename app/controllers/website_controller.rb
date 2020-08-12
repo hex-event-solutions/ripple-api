@@ -22,6 +22,6 @@ class WebsiteController < ApplicationController
   end
 
   def host
-    request.headers['referer'].match(/https?:\/\/([a-z0-9\-\.]*)[:\/]/)[1]
+    request.headers['referer'].match(%r{https?://([a-z0-9\-.]*)[:/]})[1]
   end
 end

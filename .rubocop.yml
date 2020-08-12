@@ -45,7 +45,7 @@ Metrics/BlockLength:
 
 Layout/LineLength:
   Exclude:
-    - db/seeds.rb
+    - db/**/*
 
 Lint/UselessAssignment:
   Exclude:

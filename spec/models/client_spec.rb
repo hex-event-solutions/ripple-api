@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Client, type: :model do
-  subject { create :client }
+  subject { build :client }
 
   describe 'fields' do
     it { should validate_presence_of(:organisation_name) }

@@ -12,7 +12,7 @@ class Asset < ApplicationRecord
   belongs_to :asset_type
   belongs_to :asset_case, optional: true
 
-  validates :company, :asset_type, presence: true
+  validates :company, :asset_type, :barcode, presence: true
   validates :barcode, length: { maximum: 16 }, uniqueness: { scope: :company_id }
 
   before_create :create_barcode

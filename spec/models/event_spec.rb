@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Event do
-  subject { create :event }
+  subject { build :event }
 
   describe 'fields' do
     it { should validate_presence_of(:client) }

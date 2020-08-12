@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Specification do
-  subject { create :specification }
+  subject { build :specification }
 
   describe 'fields' do
     it { should validate_presence_of(:name) }

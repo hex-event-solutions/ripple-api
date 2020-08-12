@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe AssetTypeMultiplierType do
-  subject { create :asset_type_multiplier_type }
+  subject { build :asset_type_multiplier_type }
 
   describe 'fields' do
     it { should validate_presence_of(:company) }

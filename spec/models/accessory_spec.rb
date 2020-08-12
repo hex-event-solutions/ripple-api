@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Accessory do
-  subject { create :accessory }
+  subject { build :accessory }
 
   describe 'fields' do
     it { should validate_presence_of(:asset_type) }

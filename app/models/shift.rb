@@ -12,7 +12,7 @@ class Shift < ApplicationRecord
   belongs_to :company
   belongs_to :event
 
-  validates :company, :event, :start, :finish, :rate, :price, presence: true
+  validates :company, :event, :start, :finish, :rate, :price, :crew_id, presence: true
   validates :rate, :price, numericality: true
 
   def crew

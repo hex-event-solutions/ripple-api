@@ -5,22 +5,22 @@ require 'faker'
 FactoryBot.define do
   factory :accessory do
     company
-    asset_type { create(:asset_type, company: company) }
-    accessory { create(:asset_type, company: company) }
+    asset_type { build(:asset_type, company: company) }
+    accessory { build(:asset_type, company: company) }
     quantity { Faker::Number.decimal(l_digits: 1) }
   end
 
   factory :asset do
     company
-    asset_type { create(:asset_type, company: company) }
-    asset_case { create(:asset_case, company: company) }
+    asset_type { build(:asset_type, company: company) }
+    asset_case { build(:asset_case, company: company) }
     barcode { Faker::Internet.password }
   end
 
   factory :asset_type_category do
     company
-    asset_type { create(:asset_type, company: company) }
-    category { create(:category, company: company) }
+    asset_type { build(:asset_type, company: company) }
+    category { build(:category, company: company) }
   end
 
   factory :asset_type do
@@ -36,14 +36,14 @@ FactoryBot.define do
 
   factory :asset_type_multiplier_type do
     company
-    multiplier_type { create(:multiplier_type, company: company) }
-    asset_type { create(:asset_type, company: company) }
+    multiplier_type { build(:multiplier_type, company: company) }
+    asset_type { build(:asset_type, company: company) }
   end
 
   factory :asset_type_specification do
     company
-    asset_type { create(:asset_type, company: company) }
-    specification { create(:specification, company: company) }
+    asset_type { build(:asset_type, company: company) }
+    specification { build(:specification, company: company) }
     value { Faker::Verb.base }
   end
 
@@ -55,12 +55,12 @@ FactoryBot.define do
   factory :category do
     company
     name { 'Sound' }
-    parent { create(:category, name: 'Equipment', parent: nil, company: company) }
+    parent { build(:category, name: 'Equipment', parent: nil, company: company) }
   end
 
   factory :client do
     company
-    client_type { create(:client_type, company: company) }
+    client_type { build(:client_type, company: company) }
     organisation_name { Faker::Company.name }
     address1 { Faker::Address.street_address }
     address2 { Faker::Address.secondary_address }
@@ -92,31 +92,22 @@ FactoryBot.define do
 
   factory :contact do
     company
-    client { create(:client, company: company) }
+    client { build(:client, company: company) }
     name { Faker::Name.name }
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.cell_phone }
     details { Faker::Lorem.paragraph }
   end
 
-  factory :crew do
-    company
-    name { Faker::Name.name }
-    email { Faker::Internet.email }
-    rate { Faker::Number.decimal(l_digits: 2) }
-    price { Faker::Number.decimal(l_digits: 2) }
-    password { Faker::Internet.password }
-  end
-
   factory :document do
     company
-    document_type { create(:document_type, company: company) }
+    document_type { build(:document_type, company: company) }
     subject_id { '123' }
   end
 
   factory :document_item do
     company
-    document { create(:document, company: company) }
+    document { build(:document, company: company) }
     for_row_item
     quantity { Faker::Number.decimal(l_digits: 2) }
     discount { Faker::Number.number(digits: 2) }
@@ -137,8 +128,8 @@ FactoryBot.define do
 
   factory :document_state_event do
     company
-    document_state { create(:document_state, company: company) }
-    document { create(:document, company: company) }
+    document_state { build(:document_state, company: company) }
+    document { build(:document, company: company) }
     details { Faker::Lorem.paragraph }
   end
 
@@ -151,7 +142,7 @@ FactoryBot.define do
 
   factory :event do
     company
-    client { create(:client, company: company) }
+    client { build(:client, company: company) }
     date_start { Faker::Date.in_date_period(month: 1) }
     date_out { Faker::Date.in_date_period(month: 2) }
     date_return { Faker::Date.in_date_period(month: 3) }
@@ -163,9 +154,9 @@ FactoryBot.define do
 
   factory :maintenance_event do
     company
-    maintenance_schedule { create(:maintenance_schedule, company: company) }
-    maintenance_resolution { create(:maintenance_resolution, company: company) }
-    asset { create(:asset, company: company) }
+    maintenance_schedule { build(:maintenance_schedule, company: company) }
+    maintenance_resolution { build(:maintenance_resolution, company: company) }
+    asset { build(:asset, company: company) }
     details { Faker::Lorem.paragraph }
   end
 
@@ -183,8 +174,8 @@ FactoryBot.define do
 
   factory :maintenance_schedule do
     company
-    asset_type { create(:asset_type, company: company) }
-    maintenance_type { create(:maintenance_type, company: company) }
+    asset_type { build(:asset_type, company: company) }
+    maintenance_type { build(:maintenance_type, company: company) }
     details { Faker::Lorem.paragraph }
     repeat_period { %w[day week month year].sample }
     repeat_multiplier { [1, 2, 3, 4].sample }
@@ -212,8 +203,8 @@ FactoryBot.define do
 
   factory :shift do
     company
-    crew { create(:crew, company: company) }
-    event { create(:event, company: company) }
+    crew_id { 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'}
+    event { build(:event, company: company) }
     start { Faker::Date.in_date_period(month: 1) }
     finish { Faker::Date.in_date_period(month: 2) }
     rate { Faker::Number.decimal(l_digits: 2) }

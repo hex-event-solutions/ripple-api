@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe MaintenanceType do
-  subject { create :maintenance_type }
+  subject { build :maintenance_type }
 
   describe 'fields' do
     it { should validate_presence_of(:name) }

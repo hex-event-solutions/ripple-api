@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe DocumentStateEvent do
-  subject { create :document_state_event }
+  subject { build :document_state_event }
 
   describe 'fields' do
     it { should validate_presence_of(:document) }

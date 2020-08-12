@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Category do
-  subject { create :category }
+  subject { build :category }
 
   describe 'fields' do
     it { should validate_presence_of(:name) }

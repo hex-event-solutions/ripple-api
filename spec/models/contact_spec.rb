@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Contact do
-  subject { create :contact }
+  subject { build :contact }
 
   describe 'fields' do
     it { should validate_presence_of(:client) }
