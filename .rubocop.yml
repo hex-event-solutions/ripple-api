@@ -32,16 +32,28 @@ Metrics/AbcSize:
   Exclude:
     - db/migrate/*
     - app/controllers/graphql_controller.rb
+    - app/models/company.rb
 
 Metrics/MethodLength:
   Exclude:
     - db/migrate/*
     - app/controllers/graphql_controller.rb
+    - app/models/document_type.rb
+    - app/models/company.rb
+    - app/graphql/types/queries/asset_types.rb
+    - app/graphql/types/queries/document_types.rb
+    - app/graphql/types/ripple/document_subject.rb
 
 Metrics/BlockLength:
   Exclude:
     - db/schema.rb
     - spec/**/*
+
+Metrics/ClassLength:
+  Exclude:
+    - lib/yaml_to_html.rb
+    - app/models/company.rb
+    - app/models/asset_type.rb
 
 Layout/LineLength:
   Exclude:
