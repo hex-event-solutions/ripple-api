@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'yaml_to_html'
+require_relative '../../lib/yaml_to_html'
 
 class DocumentType < ApplicationRecord
   has_many :documents, -> { where template: false }
