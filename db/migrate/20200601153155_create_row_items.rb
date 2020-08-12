@@ -6,6 +6,7 @@ class CreateRowItems < ActiveRecord::Migration[6.0]
       t.references :company, type: :uuid, null: false, foreign_key: true
       t.decimal :price
       t.string :description
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end

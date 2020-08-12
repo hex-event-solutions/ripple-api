@@ -6,6 +6,7 @@ class CreateResourceImages < ActiveRecord::Migration[6.0]
       t.references :company, type: :uuid, null: false, foreign_key: true
       t.references :image, type: :uuid, null: false
       t.references :resource, type: :uuid, null: false, polymorphic: true, index: true
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end

@@ -7,6 +7,7 @@ class CreateDocumentStateEvents < ActiveRecord::Migration[6.0]
       t.references :document_state, type: :uuid, null: false, foreign_key: true
       t.references :document, type: :uuid, null: false, foreign_key: true
       t.string :details
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end

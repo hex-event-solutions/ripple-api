@@ -8,6 +8,7 @@ class CreateEventItems < ActiveRecord::Migration[6.0]
       t.references :item, type: :uuid, null: false, polymorphic: true, index: true
       t.decimal :quantity
       t.integer :discount
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end

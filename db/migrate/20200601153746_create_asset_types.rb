@@ -11,6 +11,7 @@ class CreateAssetTypes < ActiveRecord::Migration[6.0]
       t.string :model
       t.decimal :weight
       t.string :description
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end

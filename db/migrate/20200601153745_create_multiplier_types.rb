@@ -9,6 +9,7 @@ class CreateMultiplierTypes < ActiveRecord::Migration[6.0]
       t.string :multiplier_type
       t.integer :operand_quantity
       t.string :operand_type
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end

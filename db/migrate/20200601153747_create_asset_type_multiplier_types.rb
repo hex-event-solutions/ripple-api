@@ -6,6 +6,7 @@ class CreateAssetTypeMultiplierTypes < ActiveRecord::Migration[6.0]
       t.references :company, type: :uuid, null: false, foreign_key: true
       t.references :asset_type, type: :uuid, null: false, foreign_key: true
       t.references :multiplier_type, type: :uuid, null: false, foreign_key: true
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end

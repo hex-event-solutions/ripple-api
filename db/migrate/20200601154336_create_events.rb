@@ -12,6 +12,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :description
       t.text :details
       t.text :location
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end

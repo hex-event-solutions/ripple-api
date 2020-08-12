@@ -9,6 +9,7 @@ class CreateMaintenanceSchedules < ActiveRecord::Migration[6.0]
       t.text :details
       t.integer :repeat_multiplier
       t.string :repeat_period
+      t.boolean :template, null: false, default: false
 
       t.timestamps
     end
