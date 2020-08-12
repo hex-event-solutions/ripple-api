@@ -30,6 +30,7 @@ gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner'
   gem 'factory_bot_rails', '~> 5.2'
@@ -56,7 +57,9 @@ gem 'graphql', '~> 1.9'
 
 gem 'airbrake', '~> 10.0.5'
 gem 'aws-sdk-s3', require: false
+gem 'image_processing'
+gem 'mini_magick'
 gem 'mustache', '~>1.0.2'
-gem 'ripple_token', '~> 0.2.4'
+gem 'ripple_token', '~> 0.4.0'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
