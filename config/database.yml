@@ -58,4 +58,4 @@ test:
 #
 production:
   <<: *default
-  database: ripple-api_production
+  database: ripple-api
