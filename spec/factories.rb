@@ -203,7 +203,7 @@ FactoryBot.define do
 
   factory :shift do
     company
-    crew_id { 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'}
+    crew_id { 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' }
     event { build(:event, company: company) }
     start { Faker::Date.in_date_period(month: 1) }
     finish { Faker::Date.in_date_period(month: 2) }
