@@ -16,7 +16,7 @@ module Mutations
       argument :logo, String, required: false
       argument :domain, String, required: false
 
-      field :company, Types::RippleCompanyType, null: true
+      field :company, Types::Ripple::CompanyType, null: true
 
       def resolve(name:, **params)
         company = Company.new(name: name, **params)

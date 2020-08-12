@@ -8,7 +8,7 @@ module Mutations
       argument :id, ID, required: true
       argument :name, String, required: true
 
-      field :document_state, Types::RippleDocumentStateType, null: true
+      field :document_state, Types::Ripple::DocumentStateType, null: true
 
       def resolve(id:, **params)
         update(DocumentState, id, params)

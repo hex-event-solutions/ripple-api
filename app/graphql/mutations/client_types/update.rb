@@ -8,7 +8,7 @@ module Mutations
       argument :id, ID, required: true
       argument :name, String, required: true
 
-      field :client_type, Types::RippleClientTypeType, null: true
+      field :client_type, Types::Ripple::ClientTypeType, null: true
 
       def resolve(id:, **params)
         update(ClientType, id, params)

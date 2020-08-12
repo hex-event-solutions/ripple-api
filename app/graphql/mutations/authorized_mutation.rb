@@ -17,7 +17,6 @@ module Mutations
         _, module_class, self_class = subclass.name.split('::')
         name = "#{self_class}#{module_class}".to_sym
         subclass.graphql_name name
-        puts "Resource: #{module_class.underscore}, action: #{self_class.underscore}"
         subclass.resource module_class.singularize.underscore
         subclass.action self_class.underscore
       end

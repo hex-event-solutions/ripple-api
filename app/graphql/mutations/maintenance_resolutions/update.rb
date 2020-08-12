@@ -8,7 +8,7 @@ module Mutations
       argument :id, ID, required: true
       argument :name, String, required: true
 
-      field :maintenance_resolution, Types::RippleMaintenanceResolutionType, null: true
+      field :maintenance_resolution, Types::Ripple::MaintenanceResolutionType, null: true
 
       def resolve(id:, **params)
         update(MaintenanceResolution, id, params)

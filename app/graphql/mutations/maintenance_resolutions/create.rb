@@ -7,7 +7,7 @@ module Mutations
 
       argument :name, String, required: true
 
-      field :maintenance_resolution, Types::RippleMaintenanceResolutionType, null: true
+      field :maintenance_resolution, Types::Ripple::MaintenanceResolutionType, null: true
 
       def resolve(**params)
         create(MaintenanceResolution, context[:company_id], params)
