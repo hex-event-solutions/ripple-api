@@ -19,4 +19,8 @@ class RowItem < ApplicationRecord
     item[:unit_price] = currency(price)
     item
   end
+
+  def duration_price(**params)
+    price
+  end
 end
