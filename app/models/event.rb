@@ -115,8 +115,12 @@ class Event < ApplicationRecord
     1 - (value / 100.0)
   end
 
+  def total_value
+    @total_value ||= items.map { |i| i[:raw_subtotal] }.reduce(&:+) || 0
+  end
+
   def grand_total
-    currency(items.map { |i| i[:raw_subtotal] }.reduce(&:+) || 0)
+    currency(total_value)
   end
 
   def asset_types_total_value
