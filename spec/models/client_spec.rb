@@ -7,6 +7,9 @@ RSpec.describe Client, type: :model do
 
   describe 'fields' do
     it { should validate_presence_of(:organisation_name) }
+    it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:county) }
+    it { should validate_presence_of(:postcode) }
     it { should validate_presence_of(:discount) }
 
     it { should validate_length_of(:organisation_name).is_at_most(128) }
