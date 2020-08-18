@@ -50,4 +50,8 @@ class ApplicationRecord < ActiveRecord::Base
       end
     end
   end
+
+  def self.with(company_id)
+    where(company_id: company_id)
+  end
 end
