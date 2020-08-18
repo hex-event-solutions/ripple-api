@@ -10,6 +10,7 @@ module Types
       field :description, String, null: false
       field :details, String, null: true
       field :location, String, null: false
+      field :total_value, Float, null: false
 
       field :documents, [Types::Ripple::DocumentType], null: true
       field :assets, [Types::Ripple::AssetType], null: true
