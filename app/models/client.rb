@@ -24,7 +24,7 @@ class Client < ApplicationRecord
   validates :address1, :address2, :address3, :city, :county, length: { maximum: 64 }
   validates :postcode, length: { maximum: 10 }
   validates :discount, presence: true, numericality: { only_integer: true }
-  validates :company, :client_type, presence: true
+  validates :company, :client_type, :city, :county, :postcode, presence: true
 
   mustache(
     organisation_name: ->(v) { v },
