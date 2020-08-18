@@ -12,6 +12,11 @@ class Document < ApplicationRecord
 
   default_scope { includes(:document_type, :files_attachments) }
 
+  mustache(
+    date_due: ->(v) { v.strftime('%d-%m-%Y %H:%M') },
+    date_issued: ->(v) { v.strftime('%d-%m-%Y %H:%M') }
+  )
+
   def generate
     pdf = create_pdf_string
     file = Tempfile.new
