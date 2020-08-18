@@ -57,5 +57,13 @@ module Types
     field :create_event, mutation: Mutations::Events::Create
     field :update_event, mutation: Mutations::Events::Update
     field :delete_event, mutation: Mutations::Events::Delete
+
+    field :create_event_item, mutation: Mutations::EventItems::Create
+    field :delete_event_item, mutation: Mutations::EventItems::Delete
+
+    field :create_client, mutation: Mutations::Clients::Create
+    field :update_client, mutation: Mutations::Clients::Update
+    field :delete_client, mutation: Mutations::Clients::Delete
+
   end
 end
