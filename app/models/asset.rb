@@ -15,7 +15,7 @@ class Asset < ApplicationRecord
   validates :company, :asset_type, :barcode, presence: true
   validates :barcode, length: { maximum: 16 }, uniqueness: { scope: :company_id }
 
-  before_create :create_barcode
+  before_validation :create_barcode, on: :create
 
   mustache(
     barcode: ->(v) { v },

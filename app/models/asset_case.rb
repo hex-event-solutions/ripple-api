@@ -12,13 +12,14 @@ class AssetCase < ApplicationRecord
   validates :company, :barcode, presence: true
   validates :barcode, length: { maximum: 16 }
 
-  before_create :create_barcode
+  before_validation :create_barcode, on: :create
 
   mustache(
     barcode: ->(v) { v }
   )
 
   def create_barcode
+    puts 'in create barcode'
     current_barcode = self.class.where(company_id: company_id).without_templates.maximum(:barcode_number) || 0
     next_barcode = current_barcode + 1
     self.barcode_number = next_barcode
