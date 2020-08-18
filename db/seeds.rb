@@ -322,6 +322,7 @@ asu = Client.create!(
   organisation_name: "Aston Students' Union",
   address1: '8 Coleshill Street',
   city: 'Birmingham',
+  county: 'Birmingham',
   postcode: 'B4 7BX',
   discount: 0,
   client_type: charity
