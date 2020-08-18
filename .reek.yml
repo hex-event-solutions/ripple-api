@@ -8,6 +8,7 @@ detectors:
       - GraphqlController#ensure_hash
 
   TooManyStatements:
+    max_statements: 10
     exclude:
       - GraphqlController#execute
 

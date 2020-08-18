@@ -64,6 +64,5 @@ module Types
     field :create_client, mutation: Mutations::Clients::Create
     field :update_client, mutation: Mutations::Clients::Update
     field :delete_client, mutation: Mutations::Clients::Delete
-
   end
 end

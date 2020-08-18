@@ -9,7 +9,10 @@ module Types
           argument :id, Types::BaseObject::ID, required: true
         end
         base.field :locations, [String], null: true, description: 'Returns all locations'
-        base.field :calendar, Types::Ripple::CalendarType, null: false, description: 'All events in the same month as a given date' do
+        base.field :calendar,
+                   Types::Ripple::CalendarType,
+                   null: false,
+                   description: 'All events in the same month as a given date' do
           argument :date, GraphQL::Types::ISO8601DateTime, required: true
         end
       end

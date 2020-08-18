@@ -5,7 +5,7 @@ module Types
     module RowItems
       def self.included(base)
         base.field :row_items, [Types::Ripple::RowItemType], null: false, description: 'Returns all row items'
-        base.field :row_item_descriptions, [String], null: false, description: 'All variants on the row item description'
+        base.field :row_item_descriptions, [String], null: false, description: 'All row item descriptions'
         base.field :row_item_prices, [Float], null: false, description: 'Prices for a given row item' do
           argument :description, String, required: true
         end

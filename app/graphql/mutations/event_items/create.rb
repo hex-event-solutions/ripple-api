@@ -43,9 +43,7 @@ module Mutations
           Asset.find_by!(company_id: context[:company_id], id: params[:asset_id])
         elsif params[:row_item] && params[:row_item_price]
           RowItem.find_or_create_by(
-            company_id: context[:company_id],
-            description: params[:row_item],
-            price: params[:row_item_price]
+            company_id: context[:company_id], description: params[:row_item], price: params[:row_item_price]
           )
         end
       end

@@ -19,7 +19,9 @@ module Types
       end
 
       def events_today
-        Event.with(context[:company_id]).where('date_return >= ? AND date_out <= ?', Time.now.beginning_of_day, Time.now.end_of_day).count
+        start_date = Time.now.beginning_of_day
+        end_date = Time.now.end_of_day
+        Event.with(context[:company_id]).where('date_return >= ? AND date_out <= ?', start_date, end_date).count
       end
 
       def unpaid_invoices

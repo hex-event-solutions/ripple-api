@@ -20,7 +20,7 @@ class RowItem < ApplicationRecord
     item
   end
 
-  def duration_price(**params)
+  def duration_price(**_params)
     price
   end
 end
