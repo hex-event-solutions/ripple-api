@@ -13,6 +13,7 @@ module Types
     include Types::Queries::Clients
     include Types::Queries::Companies
     include Types::Queries::Crew
+    include Types::Queries::Dashboard
     include Types::Queries::DocumentStates
     include Types::Queries::DocumentTypes
     include Types::Queries::Documents
