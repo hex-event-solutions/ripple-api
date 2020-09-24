@@ -31,6 +31,13 @@ module Types
           argument :asset_type_id, Types::BaseObject::ID, required: true
         end
 
+        base.field :available_maintenance_schedules,
+                   [Types::Ripple::MaintenanceScheduleType],
+                   null: false,
+                   description: 'Returns available maintenance schedules for a given asset type' do
+          argument :asset_type_id, Types::BaseObject::ID, required: true
+        end
+
         base.field :available_specifications,
                    [Types::Ripple::SpecificationType],
                    null: false,
@@ -52,31 +59,41 @@ module Types
       end
 
       def asset_type(id:)
-        AssetType.find_by!(company_id: context[:company_id], id: id)
+        find(id)
       end
 
       def available_accessories(asset_type_id:)
-        AssetType.find_by!(company_id: context[:company_id], id: asset_type_id).available_accessories
+        find(asset_type_id).available_accessories
       end
 
       def available_categories(asset_type_id:)
-        AssetType.find_by!(company_id: context[:company_id], id: asset_type_id).available_categories
+        find(asset_type_id).available_categories
       end
 
       def available_multiplier_types(asset_type_id:)
-        AssetType.find_by!(company_id: context[:company_id], id: asset_type_id).available_multiplier_types
+        find(asset_type_id).available_multiplier_types
+      end
+
+      def available_maintenance_schedules(asset_type_id:)
+        find(asset_type_id).available_maintenance_schedules
       end
 
       def available_specifications(asset_type_id:)
-        AssetType.find_by!(company_id: context[:company_id], id: asset_type_id).available_specifications
+        find(asset_type_id).available_specifications
       end
 
       def manufacturers
-        AssetType.where(company_id: context[:company_id]).without_templates.distinct.pluck(:manufacturer)
+        AssetType.with(context[:company_id]).without_templates.distinct.pluck(:manufacturer)
       end
 
       def models(manufacturer:)
-        AssetType.where(company_id: context[:company_id], manufacturer: manufacturer).distinct.pluck(:model)
+        AssetType.with(context[:company_id]).where(manufacturer: manufacturer).distinct.pluck(:model)
+      end
+
+      private
+
+      def find(id)
+        AssetType.with(context[:company_id]).find(id)
       end
     end
   end

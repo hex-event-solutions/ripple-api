@@ -51,7 +51,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.hosts << 'ripple.hexes.co.uk'
+  config.hosts << 'api.ripple.hexes.co.uk'
 
   config.after_initialize do
     Bullet.enable = true

@@ -6,6 +6,7 @@ module Types
       field :details, String, null: true
       field :repeat_multiplier, Int, null: false
       field :repeat_period, String, null: false
+      field :summary, String, null: false
 
       field :maintenance_events, [Types::Ripple::MaintenanceEventType], null: true
       field :documents, [Types::Ripple::DocumentType], null: true

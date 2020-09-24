@@ -19,9 +19,11 @@ module Types
     include Types::Queries::Documents
     include Types::Queries::Events
     include Types::Queries::MaintenanceResolutions
+    include Types::Queries::MaintenanceSchedules
     include Types::Queries::MaintenanceTypes
     include Types::Queries::MultiplierTypes
     include Types::Queries::RowItems
+    include Types::Queries::Settings
     include Types::Queries::Specifications
   end
 end

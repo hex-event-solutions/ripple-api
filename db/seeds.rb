@@ -8,6 +8,9 @@ tmpl_footer = Setting.create!(name: 'Document footer')
 tmpl_styles = Setting.create!(name: 'Document styles')
 asset_barcode = Setting.create!(name: 'Asset barcode pattern')
 asset_case_barcode = Setting.create!(name: 'Asset case barcode pattern')
+Setting.create!(name: 'Language - Event')
+Setting.create!(name: 'Language - Asset')
+Setting.create!(name: 'Language - Client')
 
 ## Start of test data
 
@@ -405,7 +408,7 @@ schedule = MaintenanceSchedule.create!(
 MaintenanceEvent.create!(
   company: hex,
   maintenance_schedule: schedule,
-  maintenance_resolution: MaintenanceResolution.find_by!(company: hex, name: 'Maintenance completed'),
+  maintenance_resolution: MaintenanceResolution.find_by!(company: hex, name: 'Passed'),
   asset: asset
 )
 

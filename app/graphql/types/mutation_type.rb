@@ -47,6 +47,9 @@ module Types
     field :create_asset_type_specification, mutation: Mutations::AssetTypeSpecifications::Create
     field :delete_asset_type_specification, mutation: Mutations::AssetTypeSpecifications::Delete
 
+    field :create_asset_type_maintenance_schedule, mutation: Mutations::AssetTypeMaintenanceSchedules::Create
+    field :delete_asset_type_maintenance_schedule, mutation: Mutations::AssetTypeMaintenanceSchedules::Delete
+
     field :create_asset_type_multiplier_type, mutation: Mutations::AssetTypeMultiplierTypes::Create
     field :delete_asset_type_multiplier_type, mutation: Mutations::AssetTypeMultiplierTypes::Delete
 
@@ -64,5 +67,11 @@ module Types
     field :create_client, mutation: Mutations::Clients::Create
     field :update_client, mutation: Mutations::Clients::Update
     field :delete_client, mutation: Mutations::Clients::Delete
+
+    field :create_maintenance_event, mutation: Mutations::MaintenanceEvents::Create
+    field :delete_maintenance_event, mutation: Mutations::MaintenanceEvents::Delete
+
+    field :create_maintenance_tasks, mutation: Mutations::MaintenanceTasks::Create
+    field :delete_maintenance_tasks, mutation: Mutations::MaintenanceTasks::Delete
   end
 end

@@ -8,5 +8,5 @@ class Accessory < ApplicationRecord
   belongs_to :accessory, class_name: 'AssetType'
 
   validates :company, :asset_type, :accessory, :quantity, presence: true
-  validates :quantity, numericality: true
+  validates :quantity, numericality: { greater_than_or_equal_to: 0 }
 end

@@ -9,6 +9,7 @@ class Document < ApplicationRecord
   belongs_to :document_type
 
   validates :company, :document_type, presence: true
+  validates :number, numericality: { greater_than_or_equal_to: 0 }
 
   default_scope { includes(:document_type, :files_attachments) }
 

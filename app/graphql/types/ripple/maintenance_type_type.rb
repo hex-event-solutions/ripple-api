@@ -7,6 +7,7 @@ module Types
 
       field :maintenance_schedules, [Types::Ripple::MaintenanceScheduleType], null: true
       field :maintenance_events, [Types::Ripple::MaintenanceEventType], null: true
+      field :tasks, [Types::Ripple::MaintenanceTypeTaskType], null: true
     end
   end
 end

@@ -55,6 +55,7 @@ class Company < ApplicationRecord
     create_maintenance_types
     create_maintenance_resolutions
     create_document_states
+    create_settings
 
     create_template_data
   end
@@ -186,8 +187,10 @@ class Company < ApplicationRecord
   def create_maintenance_resolutions
     MaintenanceResolution.create!(company: self, name: 'Asset disposed of')
     MaintenanceResolution.create!(company: self, name: 'Asset under inspection')
-    MaintenanceResolution.create!(company: self, name: 'Maintenance completed')
     MaintenanceResolution.create!(company: self, name: 'Asset will not be repaired')
+    MaintenanceResolution.create!(company: self, name: 'Passed')
+    MaintenanceResolution.create!(company: self, name: 'Failed')
+    MaintenanceResolution.create!(company: self, name: 'Completed')
   end
 
   def create_document_states
@@ -197,5 +200,18 @@ class Company < ApplicationRecord
     DocumentState.create!(company: self, name: 'Expired')
     DocumentState.create!(company: self, name: 'Invoiced')
     DocumentState.create!(company: self, name: 'Paid')
+  end
+
+  def create_settings
+    CompanySetting.create!(
+      company: self,
+      setting: Setting.find_by!(name: 'Asset barcode pattern'),
+      value: '(000000)'
+    )
+    CompanySetting.create!(
+      company: self,
+      setting: Setting.find_by!(name: 'Asset case barcode pattern'),
+      value: '(000000)'
+    )
   end
 end

@@ -24,3 +24,4 @@
 /data
 /db/test.sqlite3
 /coverage
+log

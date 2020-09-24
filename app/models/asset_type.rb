@@ -16,7 +16,8 @@ class AssetType < ApplicationRecord
   )
 
   has_many :assets, dependent: :destroy
-  has_many :maintenance_schedules, dependent: :destroy
+  has_many :asset_type_maintenance_schedules, dependent: :destroy
+  has_many :maintenance_schedules, through: :asset_type_maintenance_schedules
   has_many :asset_type_specifications, dependent: :destroy
   has_many :specifications, through: :asset_type_specifications
   has_many :asset_type_categories, dependent: :destroy
@@ -28,7 +29,7 @@ class AssetType < ApplicationRecord
   belongs_to :company
 
   validates :company, :cost, :rate, :manufacturer, :model, :weight, presence: true
-  validates :cost, :rate, :weight, numericality: true
+  validates :cost, :rate, :weight, numericality: { greater_than_or_equal_to: 0 }
   validates :display_on_website, inclusion: { in: [true, false] }
   validates :manufacturer, :model, length: { maximum: 64 }
 
@@ -122,6 +123,11 @@ class AssetType < ApplicationRecord
   def available_multiplier_types
     multiplier_type_ids = asset_type_multiplier_types.map(&:multiplier_type_id)
     MultiplierType.where(company_id: company_id).where.not(id: multiplier_type_ids).without_templates
+  end
+
+  def available_maintenance_schedules
+    maintenance_schedule_ids = asset_type_maintenance_schedules.map(&:maintenance_schedule_id)
+    MaintenanceSchedule.where(company_id: company_id).where.not(id: maintenance_schedule_ids).without_templates
   end
 
   def available_specifications

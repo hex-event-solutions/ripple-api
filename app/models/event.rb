@@ -24,6 +24,7 @@ class Event < ApplicationRecord
 
   validates :company, :client, :date_start, :date_end, :date_out, :date_return, :description, :location, presence: true
   validate :dates_are_possible?
+  validate :date_span
 
   default_scope { includes(:event_items) }
 
@@ -46,7 +47,13 @@ class Event < ApplicationRecord
       return if current_order == sorted_order
     end
 
-    errors.add(:dates, 'date_out <= date_start <= date_end <= date_return')
+    errors.add(:dates, 'Date out <= Date start <= Date end <= Date return')
+  end
+
+  def date_span
+    maximum_end = date_out + 3.months
+
+    errors.add(:dates, 'An event must span less than 3 calendar months') if date_return > maximum_end
   end
 
   def items

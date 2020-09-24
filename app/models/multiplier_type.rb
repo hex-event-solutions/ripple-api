@@ -8,7 +8,7 @@ class MultiplierType < ApplicationRecord
 
   validates :company, :name, :multiplier, :multiplier_type, :operand_type, :operand_quantity, presence: true
   validates :name, length: { maximum: 32 }
-  validates :multiplier, :operand_quantity, numericality: true
+  validates :multiplier, :operand_quantity, numericality: { greater_than_or_equal_to: 0 }
   validates :operand_type, :multiplier_type, inclusion: %w[hour day week month year]
   validate :unique_unit_duration
 

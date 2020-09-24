@@ -42,10 +42,12 @@ module Mutations
         elsif params[:asset_id]
           Asset.find_by!(company_id: context[:company_id], id: params[:asset_id])
         elsif params[:row_item] && params[:row_item_price]
-          RowItem.find_or_create_by(
+          RowItem.find_or_create_by!(
             company_id: context[:company_id], description: params[:row_item], price: params[:row_item_price]
           )
         end
+      rescue ActiveRecord::RecordInvalid => e
+        raise GraphQL::ExecutionError, e
       end
     end
   end

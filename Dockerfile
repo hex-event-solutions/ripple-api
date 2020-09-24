@@ -16,4 +16,4 @@ COPY . /myapp/
 
 RUN chmod 700 /tmp
 
-CMD /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle install && ./bin/rails server"
+CMD /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle install && ./bin/rails server -p 3000 -b '0.0.0.0'"

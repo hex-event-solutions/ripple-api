@@ -7,13 +7,17 @@ class Asset < ApplicationRecord
   template_values barcode: 'Template barcode'
 
   has_many :maintenance_events, dependent: :destroy
+  has_many :maintenance_tasks, through: :maintenance_events, dependent: :destroy
 
   belongs_to :company
   belongs_to :asset_type
   belongs_to :asset_case, optional: true
 
+  alias_attribute :tasks, :maintenance_tasks
+
   validates :company, :asset_type, :barcode, presence: true
   validates :barcode, length: { maximum: 16 }, uniqueness: { scope: :company_id }
+  validates :number, numericality: { greater_than_or_equal_to: 0 }
 
   before_validation :create_barcode, on: :create
 
@@ -31,6 +35,19 @@ class Asset < ApplicationRecord
     next_barcode = current_barcode + 1
     self.barcode_number = next_barcode
     self.barcode ||= format_barcode(number: next_barcode)
+  end
+
+  def next_maintenance_due
+    asset_type.maintenance_schedules.map do |schedule|
+      last_event = schedule.last_event_for(id)
+      date_increment = schedule.repeat_multiplier.send(schedule.repeat_period.to_sym)
+      next_date = last_event.updated_at + date_increment
+      {
+        id: SecureRandom.uuid,
+        maintenance_schedule: schedule,
+        due: next_date
+      }
+    end
   end
 
   private

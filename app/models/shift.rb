@@ -13,7 +13,7 @@ class Shift < ApplicationRecord
   belongs_to :event
 
   validates :company, :event, :start, :finish, :rate, :price, :crew_id, presence: true
-  validates :rate, :price, numericality: true
+  validates :rate, :price, numericality: { greater_than_or_equal_to: 0 }
 
   def crew
     # Crew.fetch('', id: crew_id)

@@ -190,7 +190,7 @@ GEM
       rainbow (>= 2.0, < 4.0)
     regexp_parser (1.7.0)
     rexml (3.2.4)
-    ripple_token (0.4.0)
+    ripple_token (0.5.1)
       activesupport (~> 6.0)
       httparty (= 0.18.1)
       jwt (= 2.2.1)
@@ -284,7 +284,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.0.2, >= 6.0.2.2)
   reek (~> 6.0)
-  ripple_token (~> 0.4.0)
+  ripple_token (~> 0.5.1)
   rspec (~> 3.9)
   rspec-rails (~> 4.0)
   rubocop

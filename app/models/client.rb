@@ -23,7 +23,7 @@ class Client < ApplicationRecord
   validates :organisation_name, presence: true, length: { maximum: 128 }, uniqueness: { scope: :company_id }
   validates :address1, :address2, :address3, :city, :county, length: { maximum: 64 }
   validates :postcode, length: { maximum: 10 }
-  validates :discount, presence: true, numericality: { only_integer: true }
+  validates :discount, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :company, :client_type, :city, :county, :postcode, presence: true
 
   mustache(

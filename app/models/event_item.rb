@@ -8,7 +8,7 @@ class EventItem < ApplicationRecord
   belongs_to :item, polymorphic: true
 
   validates :company, :event, :item, presence: true
-  validates :quantity, :discount, numericality: true, allow_nil: true
+  validates :quantity, :discount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   default_scope { includes(:item) }
 

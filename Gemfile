@@ -60,6 +60,6 @@ gem 'aws-sdk-s3', require: false
 gem 'image_processing'
 gem 'mini_magick'
 gem 'mustache', '~>1.0.2'
-gem 'ripple_token', '~> 0.4.0'
+gem 'ripple_token', '~> 0.5.1'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'

@@ -15,6 +15,7 @@ module Types
 
       field :assets, [Types::Ripple::AssetType], null: true
       field :events, [Types::Ripple::EventType], null: true
+      field :asset_type_maintenance_schedules, [Types::Ripple::AssetTypeMaintenanceScheduleType], null: true
       field :maintenance_schedules, [Types::Ripple::MaintenanceScheduleType], null: true
       field :asset_type_specifications, [Types::Ripple::AssetTypeSpecificationType], null: true
       field :asset_type_categories, [Types::Ripple::AssetTypeCategoryType], null: true

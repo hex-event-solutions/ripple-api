@@ -12,5 +12,6 @@ if Rails.env != 'test'
       patch: [],
       delete: []
     }
+    c.logger = Rails.logger
   end
 end
