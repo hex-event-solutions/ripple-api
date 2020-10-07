@@ -11,7 +11,7 @@ class AssetCase < ApplicationRecord
 
   validates :company, :barcode, presence: true
   validates :barcode, length: { maximum: 16 }
-  validates :number, numericality: { greater_than_or_equal_to: 0 }
+  validates :barcode_number, numericality: { greater_than_or_equal_to: 0 }
 
   before_validation :create_barcode, on: :create
 

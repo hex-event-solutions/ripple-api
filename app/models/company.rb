@@ -93,9 +93,11 @@ class Company < ApplicationRecord
       asset: tmpl_asset,
       maintenance_resolution: tmpl_maintenance_resolution
     )
+    puts 'maintenance type'
+    pp tmpl_maintenance_type
+
     tmpl_maintenance_schedule = MaintenanceSchedule.create_template!(
       company: self,
-      asset_type: tmpl_asset_type,
       maintenance_type: tmpl_maintenance_type
     )
     MaintenanceEvent.create_template!(
@@ -115,6 +117,7 @@ class Company < ApplicationRecord
   private
 
   def offboard_dependencies
+    Asset.where(company_id: id).each(&:destroy)
     AssetCase.where(company_id: id).each(&:destroy)
     Document.where(company_id: id).each(&:destroy)
     Contact.where(company_id: id).each(&:destroy)
@@ -141,6 +144,7 @@ class Company < ApplicationRecord
     DocumentType.where(company_id: id).each(&:destroy)
     MaintenanceType.where(company_id: id).each(&:destroy)
     MultiplierType.where(company_id: id).each(&:destroy)
+    CompanySetting.where(company_id: id).each(&:destroy)
   end
 
   def create_client_types

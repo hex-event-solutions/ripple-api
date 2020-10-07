@@ -308,7 +308,6 @@ ActiveRecord::Schema.define(version: 2020_07_16_142750) do
 
   create_table "images", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "company_id", null: false
-    t.string "alt"
     t.boolean "template", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
